@@ -21,10 +21,7 @@ class CreateCommand extends Command {
     },
   ];
   async run() {
-    console.log("create second");
     const { args } = this.parse(CreateCommand);
-
-    console.log("FROM CREATE FUNCTION");
 
     if (args.function && args.functionName) {
       const path = args.functionName + ".js";
@@ -42,9 +39,8 @@ class CreateCommand extends Command {
   }
 }
 
-CreateCommand.description = `Creates an ekko function.
-...
-Create an ekko function.
+CreateCommand.description = `Creates a local ekko function.
+Creates a local ekko function.
 `;
 
 // CreateCommand.flags = {

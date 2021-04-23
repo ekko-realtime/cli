@@ -43,7 +43,7 @@ const getExistingRole = async () => {
 
   try {
     lambdaRoleData = await iam.getRole(params).promise();
-    console.log("lambda role exists response: ", lambdaRoleData);
+    // console.log("lambda role exists response: ", lambdaRoleData);
   } catch (error) {
     console.error("Error checking lambda role exists", error);
   }

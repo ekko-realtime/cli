@@ -21,7 +21,6 @@ class DeployCommand extends Command {
   ];
 
   async run() {
-    // console.log("HERE IN DEPLOY COMMAND");
     const { args } = this.parse(DeployCommand);
 
     if (args.function && args.functionName) {
