@@ -1,5 +1,7 @@
 const fs = require("fs");
 const associations = require("./associationsTemplate.js");
+const ora = require("ora");
+const spinner = ora({ color: "yellow", spinner: "dots" });
 
 const duplicatePath = (path) => {
   if (fs.existsSync(path)) {
@@ -11,48 +13,59 @@ const duplicatePath = (path) => {
 
 const createFile = (path, content) => {
   fs.writeFileSync(path, content, (err) => {
-    console.log("File was written");
+    spinner.succeed("File was written");
     if (err) throw err;
   });
 };
 
 const createEkkoFunctionsDirectory = () => {
-  const functionTemplateContent =
-    "exports.handler = async (event) => {\nconst response = {\nstatusCode: 200,\nbody: JSON.stringify('Hello from ekko generated Lambda!'),\n};\nreturn response;\n};";
+  spinner.start();
+  if (duplicatePath("./ekko_functions")) {
+    spinner.fail(
+      "This directory already contains an ekko_functions directory!"
+    );
+  } else {
+    const functionTemplateContent =
+      "exports.handler = async (event) => {\nconst response = {\nstatusCode: 200,\nbody: JSON.stringify('Hello from ekko generated Lambda!'),\n};\nreturn response;\n};";
 
-  fs.mkdirSync("./ekko_functions", (err) => {
-    if (err) {
-      return console.error(err);
-    }
-    console.log("ekko_functions directory created successfully!");
-  });
+    fs.mkdirSync("./ekko_functions", (err) => {
+      if (err) {
+        return console.error(err);
+      }
+    });
+    spinner.succeed("ekko_functions directory created");
 
-  fs.writeFileSync(
-    "./ekko_functions/ekkoFunctionTemplate.js",
-    functionTemplateContent,
-    (err) => {
-      console.log("ekkoFunctionTemplate was written");
-      if (err) throw err;
-    }
-  );
+    fs.writeFileSync(
+      "./ekko_functions/ekkoFunctionTemplate.js",
+      functionTemplateContent,
+      (err) => {
+        if (err) throw err;
+      }
+    );
+    spinner.succeed("ekkoFunctionTemplate.js added to ekko_functions");
 
-  fs.writeFileSync(
-    "./ekko_functions/associations.json",
-    associations,
-    (err) => {
-      console.log("associations.json was written");
-      if (err) throw err;
-    }
-  );
+    fs.writeFileSync(
+      "./ekko_functions/associations.json",
+      associations,
+      (err) => {
+        if (err) throw err;
+      }
+    );
+    spinner.succeed("associations.json added to ekko_functions");
+
+    // FileUtil.createEkkoFunctionsDirectory();
+  }
 };
 
 const deleteLocalFile = (fileName) => {
   fs.unlink(fileName, (err) => {
     if (err)
-      console.log(`Error deleting ${filename} from ekko_functions:`, err);
+      spinner.fail(`Error deleting ${filename} from ekko_functions:`, err);
     else {
       if (fileName.includes(".js")) {
-        console.log(`Successfully deleted ${fileName} from ekko_functions.`);
+        spinner.succeed(
+          `Successfully deleted ${fileName} from ekko_functions.`
+        );
       }
       // Get the files in current diectory
       // after deletion
@@ -60,6 +73,8 @@ const deleteLocalFile = (fileName) => {
     }
   });
 };
+
+const readFile = () => {};
 
 // const getFilesInDirectory = () => {
 //   console.log("\nFiles present in directory:");

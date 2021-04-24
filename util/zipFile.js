@@ -1,14 +1,14 @@
 const childProcess = require("child_process");
+const ora = require("ora");
+const spinner = ora({ color: "yellow", spinner: "dots" });
 
 const zipFile = (filename) => {
   const path = process.cwd() + "/" + filename + ".js";
 
   try {
-    console.log(`Zipping ${filename}`);
     childProcess.execSync(`zip ${filename}.zip ${path}`);
-    console.log(`${filename} Zipped`);
   } catch (error) {
-    console.error(`Error zipping file ${filename}`, error.message);
+    spinner.fail(`Error zipping file ${filename}: ${error.message}`);
   }
 };
 

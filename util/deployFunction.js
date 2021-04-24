@@ -3,10 +3,14 @@ const fs = require("fs");
 const getLambdaRole = require("./getLambdaRole");
 const lambda = require("./lambda");
 const { deleteLocalFile } = require("./fileUtil");
+const ora = require("ora");
+const spinner = ora({ color: "yellow", spinner: "dots" });
 
 const deployFunction = async (fileName) => {
+  console.log("here");
   zipFile(fileName);
   const zipContents = fs.readFileSync(`${fileName}.zip`);
+  // spinner.start();
   const lambdaRole = await getLambdaRole();
   const params = {
     Code: {
@@ -19,11 +23,12 @@ const deployFunction = async (fileName) => {
   };
 
   try {
-    console.log(`Deploying ${fileName} to AWS Lambda...`);
     await lambda.createFunction(params).promise();
-    console.log(`${fileName} deployed!`);
+    spinner.succeed(
+      `ekko function '${fileName}' successfully deployed to AWS Lambda`
+    );
   } catch (error) {
-    console.error(error);
+    spinner.fail(`There was a problem deploying ${fileName}: ${error.message}`);
   }
 
   deleteLocalFile(fileName + ".zip");

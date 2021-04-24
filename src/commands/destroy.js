@@ -25,7 +25,6 @@ class DestroyCommand extends Command {
     const { args } = this.parse(DestroyCommand);
 
     destroyFunction(args.functionName);
-    // console.log(`Deleting ${args.functionName} and tearing down Lambda.`);
   }
 }
 

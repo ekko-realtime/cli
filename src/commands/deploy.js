@@ -29,9 +29,9 @@ class DeployCommand extends Command {
   }
 }
 
-DeployCommand.description = `Deploys an ekko function to AWS Lambda.
+DeployCommand.description = `Deploy an ekko function to AWS Lambda
 ...
-Deploys an ekko function to AWS Lambda.
+Deploys an ekko function to AWS Lambda
 `;
 
 // DeployCommand.flags = {

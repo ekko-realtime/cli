@@ -1,5 +1,5 @@
 const { Command } = require("@oclif/command");
-const FileUtil = require("../../util/fileUtil.js");
+const createFunction = require("../../util/createFunction");
 
 class CreateCommand extends Command {
   static args = [
@@ -14,7 +14,7 @@ class CreateCommand extends Command {
     // },
     {
       name: "functionName",
-      required: false,
+      required: true,
       description: "Name of new ekko function.",
       hidden: false,
       default: "myEkkoFunction",
@@ -22,26 +22,11 @@ class CreateCommand extends Command {
   ];
   async run() {
     const { args } = this.parse(CreateCommand);
-    const path = args.functionName + ".js";
-    const content =
-      "exports.handler = async (event) => {\nconst response = {\nstatusCode: 200,\nbody: JSON.stringify('Hello from ekko generated Lambda!'),\n};\nreturn response;\n};";
-
-    if (FileUtil.duplicatePath(path)) {
-      this.error(
-        `${args.functionName} already exists. Please specify a new name.`
-      );
-    } else {
-      FileUtil.createFile(path, content);
-      this.log(` ekko function '${path}' successfully created!`);
-    }
-
-    // if (args.function === "function" && args.functionName) {
-
-    // }
+    createFunction(args.functionName);
   }
 }
 
-CreateCommand.description = `Creates a local ekko function.
+CreateCommand.description = `Create a local ekko function.
 Creates a local ekko function.
 `;
 

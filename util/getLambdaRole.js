@@ -2,6 +2,8 @@ const { ServerlessApplicationRepository } = require("aws-sdk");
 const AWS = require("aws-sdk");
 const iam = new AWS.IAM();
 const ROLE_NAME = "lambda_basic_execution";
+const ora = require("ora");
+const spinner = ora({ color: "yellow", spinner: "dots" });
 
 const createLambdaRole = async () => {
   let newRole;
@@ -26,9 +28,9 @@ const createLambdaRole = async () => {
 
   try {
     newRole = await iam.createRole(createRoleParams).promise();
-    console.log("created new role: ", newRole);
+    spinner.succeed("created new role: ", newRole);
   } catch (error) {
-    console.error("Error creating lambda role: ", error);
+    spinner.fail("Error creating lambda role: ", error);
   }
 
   return newRole;
@@ -43,9 +45,8 @@ const getExistingRole = async () => {
 
   try {
     lambdaRoleData = await iam.getRole(params).promise();
-    // console.log("lambda role exists response: ", lambdaRoleData);
   } catch (error) {
-    console.error("Error checking lambda role exists", error);
+    spinner.fail(`Lambda role doesn't exist: ${error.message}`);
   }
   return lambdaRoleData;
 };
@@ -72,10 +73,8 @@ const getLambdaRole = async () => {
 
   if (!existingRole) {
     existingRole = await createLambdaRole();
-    console.log("check1: ", existingRole);
     let policy = await attachPolicy();
     await new Promise((resolve) => setTimeout(resolve, 10000));
-    // console.log("check2: ",existingRole);
   }
 
   return existingRole;
