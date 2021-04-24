@@ -1,4 +1,5 @@
 const fs = require("fs");
+const associations = require("./associationsTemplate.js");
 // const path = require("path");
 
 const duplicatePath = (path) => {
@@ -15,17 +16,6 @@ const createFile = (path, content) => {
     if (err) throw err;
   });
 };
-
-// const createEkkoFunctionTemplate = (path) => {
-//   const content =
-//     "exports.handler = async (event) => {\nconst response = {\nstatusCode: 200,\nbody: JSON.stringify('Hello from ekko generated Lambda!'),\n};\nreturn response;\n};";
-//   createFile(path, content);
-// };
-
-// const createEkkoAssociations = (path) => {
-//   const content = "associations";
-//   createFile(path, content);
-// };
 
 const createEkkoFunctionsDirectory = () => {
   const functionTemplateContent =
@@ -49,23 +39,13 @@ const createEkkoFunctionsDirectory = () => {
 
   fs.writeFileSync(
     "./ekko_functions/associations.json",
-    "associations",
+    associations,
     (err) => {
       console.log("associations.json was written");
       if (err) throw err;
     }
   );
 };
-
-// const readFile = (path) => {
-//   fs.readFile(path, "utf8", (err, data) => {
-//     if (err) {
-//       console.error(err);
-//       return;
-//     }
-//     console.log(data);
-//   });
-// };
 
 module.exports = {
   duplicatePath,
