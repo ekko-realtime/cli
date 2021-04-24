@@ -3,17 +3,13 @@ const childProcess = require("child_process");
 const zipFile = (filename) => {
   const path = process.cwd() + "/" + filename + ".js";
 
-  console.log("PATH", path);
-
   try {
-    // childProcess.execSync(`zip ${filename}.zip ./lambdas/${filename}.js`);
+    console.log(`Zipping ${filename}`);
     childProcess.execSync(`zip ${filename}.zip ${path}`);
+    console.log(`${filename} Zipped`);
   } catch (error) {
-    console.error(`Error zipping file ${filename}`, error);
+    console.error(`Error zipping file ${filename}`, error.message);
   }
-  console.log("zipped");
 };
 
-module.exports = {
-  zipFile,
-};
+module.exports = zipFile;
