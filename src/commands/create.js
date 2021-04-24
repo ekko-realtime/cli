@@ -33,7 +33,7 @@ class CreateCommand extends Command {
         );
       } else {
         FileUtil.createFile(path, content);
-        this.log(`${path} ekko function successfully created!`);
+        this.log(` ekko function '${path}' successfully created!`);
       }
     }
   }

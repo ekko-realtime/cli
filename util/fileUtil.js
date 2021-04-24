@@ -47,13 +47,13 @@ const createEkkoFunctionsDirectory = () => {
 };
 
 const deleteLocalFile = (fileName) => {
-  console.log(`Deleting ${fileName} from ekko_functions.`);
-  fs.unlink(fileName + ".js", (err) => {
+  fs.unlink(fileName, (err) => {
     if (err)
       console.log(`Error deleting ${filename} from ekko_functions:`, err);
     else {
-      console.log(`Successfully deleted ${fileName} from ekko_functions.`);
-
+      if (fileName.includes(".js")) {
+        console.log(`Successfully deleted ${fileName} from ekko_functions.`);
+      }
       // Get the files in current diectory
       // after deletion
       // getFilesInDirectory();

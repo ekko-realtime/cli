@@ -2,6 +2,7 @@ const zipFile = require("./zipFile");
 const fs = require("fs");
 const getLambdaRole = require("./getLambdaRole");
 const lambda = require("./lambda");
+const { deleteLocalFile } = require("./fileUtil");
 
 const deployFunction = async (fileName) => {
   zipFile(fileName);
@@ -18,12 +19,14 @@ const deployFunction = async (fileName) => {
   };
 
   try {
-    console.log(`Deploying ${fileName}`);
+    console.log(`Deploying ${fileName} to AWS Lambda...`);
     await lambda.createFunction(params).promise();
     console.log(`${fileName} deployed!`);
   } catch (error) {
     console.error(error);
   }
+
+  deleteLocalFile(fileName + ".zip");
 };
 
 module.exports = deployFunction;
