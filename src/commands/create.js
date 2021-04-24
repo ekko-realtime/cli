@@ -5,7 +5,7 @@ class CreateCommand extends Command {
   static args = [
     {
       name: "function", // name of arg to show in help and reference with args[name]
-      required: false, // make the arg required with `required: true`
+      required: true, // make the arg required with `required: true`
       description: "Create a new ekko function.", // help description
       hidden: false, // hide this arg from help
       // parse: (input) => "output", // instead of the user input, return a different value
@@ -23,7 +23,7 @@ class CreateCommand extends Command {
   async run() {
     const { args } = this.parse(CreateCommand);
 
-    if (args.function && args.functionName) {
+    if (args.function === "function" && args.functionName) {
       const path = args.functionName + ".js";
       const content =
         "exports.handler = async (event) => {\nconst response = {\nstatusCode: 200,\nbody: JSON.stringify('Hello from ekko generated Lambda!'),\n};\nreturn response;\n};";
