@@ -1,4 +1,5 @@
 const lambda = require("./lambda");
+const { deleteLocalFile } = require("./fileUtil");
 
 const destroyFunction = async (functionName) => {
   const params = {
@@ -6,9 +7,10 @@ const destroyFunction = async (functionName) => {
   };
 
   try {
-    console.log(`Tearing down Lambda ${functionName}`);
+    console.log(`Tearing down ${functionName} Lambda`);
     await lambda.deleteFunction(params).promise();
-    console.log(`Lamda ${functionName} destroyed!`);
+    console.log(`Lamda successfully destroyed!`);
+    deleteLocalFile(functionName);
   } catch (error) {
     console.log(`Error tearing down Lambda ${functionName}`, error);
   }

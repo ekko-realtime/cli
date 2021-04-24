@@ -1,6 +1,5 @@
 const fs = require("fs");
 const associations = require("./associationsTemplate.js");
-// const path = require("path");
 
 const duplicatePath = (path) => {
   if (fs.existsSync(path)) {
@@ -47,8 +46,32 @@ const createEkkoFunctionsDirectory = () => {
   );
 };
 
+const deleteLocalFile = (fileName) => {
+  console.log(`Deleting ${fileName} from ekko_functions.`);
+  fs.unlink(fileName + ".js", (err) => {
+    if (err)
+      console.log(`Error deleting ${filename} from ekko_functions:`, err);
+    else {
+      console.log(`Successfully deleted ${fileName} from ekko_functions.`);
+
+      // Get the files in current diectory
+      // after deletion
+      // getFilesInDirectory();
+    }
+  });
+};
+
+// const getFilesInDirectory = () => {
+//   console.log("\nFiles present in directory:");
+//   let files = fs.readdirSync(__dirname);
+//   files.forEach((file) => {
+//     console.log(file);
+//   });
+// };
+
 module.exports = {
   duplicatePath,
   createFile,
   createEkkoFunctionsDirectory,
+  deleteLocalFile,
 };
