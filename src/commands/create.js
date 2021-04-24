@@ -43,8 +43,4 @@ CreateCommand.description = `Creates a local ekko function.
 Creates a local ekko function.
 `;
 
-// CreateCommand.flags = {
-//   name: flags.string({char: 'n', description: 'name to print'}),
-// }
-
 module.exports = CreateCommand;

@@ -74,7 +74,6 @@ const getLambdaRole = async () => {
     existingRole = await createLambdaRole();
     console.log("check1: ", existingRole);
     let policy = await attachPolicy();
-    // console.log("policy: ", policy);
     await new Promise((resolve) => setTimeout(resolve, 10000));
     // console.log("check2: ",existingRole);
   }
