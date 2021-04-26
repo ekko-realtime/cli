@@ -1,6 +1,6 @@
 const AWS = require("aws-sdk");
-const ekkoConfig = require("./ekkoConfig");
-require("dotenv").config({ path: ekkoConfig.globalDirectory + "/.env" });
+const { EKKO_ENVIRONMENT_PATH } = require("./fileUtil");
+require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,

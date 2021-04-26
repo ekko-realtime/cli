@@ -1,8 +1,8 @@
 // Load the AWS SDK for Node.js
 var AWS = require("aws-sdk");
-const ekkoConfig = require("./ekkoConfig");
+const { EKKO_ENVIRONMENT_PATH } = require("./fileUtil");
 const fs = require("fs");
-require("dotenv").config({ path: ekkoConfig.globalDirectory + "/.env" });
+require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 const region = process.env.AWS_REGION;
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });

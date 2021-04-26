@@ -1,13 +1,36 @@
 const fs = require("fs");
 const associations = require("./associationsTemplate.js");
+const os = require("os");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
+const EKKO_GLOBAL_DIRECTORY = os.homedir() + "/.ekko";
+const EKKO_ENVIRONMENT_PATH = EKKO_GLOBAL_DIRECTORY + "/.env";
 
 const duplicatePath = (path) => {
   if (fs.existsSync(path)) {
     return true;
   } else {
     return false;
+  }
+};
+
+const saveAWSCredentials = (credentials) => {
+  // create .ekko if it does not already exist
+  if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
+    try {
+      fs.mkdirSync(EKKO_GLOBAL_DIRECTORY);
+      console.log("Ekko global directory created");
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // append credentials to .ekko/.env
+  try {
+    fs.writeFileSync(EKKO_ENVIRONMENT_PATH, credentials, { flag: "a+" });
+    spinner.succeed("AWS credentials saved to ekko environment");
+  } catch (err) {
+    console.error(err);
   }
 };
 
@@ -89,4 +112,6 @@ module.exports = {
   createFile,
   createEkkoFunctionsDirectory,
   deleteLocalFile,
+  saveAWSCredentials,
+  EKKO_ENVIRONMENT_PATH,
 };
