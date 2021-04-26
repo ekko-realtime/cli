@@ -15,7 +15,7 @@ const createFunction = (functionName) => {
     );
   } else {
     createFile(path, content);
-    spinner.succeed(`created ekko function '${path}'`);
+    spinner.succeed(`Created ekko function '${path}'`);
   }
 };
 

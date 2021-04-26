@@ -4,7 +4,7 @@ const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
 
 const destroyFunction = async (functionName) => {
-  spinner.start();
+  spinner.start(`Destroying ${functionName}...`);
   const params = {
     FunctionName: functionName,
   };

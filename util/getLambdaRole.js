@@ -28,7 +28,7 @@ const createLambdaRole = async () => {
 
   try {
     newRole = await iam.createRole(createRoleParams).promise();
-    spinner.succeed("created new role: ", newRole);
+    spinner.succeed("Created new role: ", newRole);
   } catch (error) {
     spinner.fail("Error creating lambda role: ", error);
   }

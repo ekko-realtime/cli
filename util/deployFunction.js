@@ -7,10 +7,9 @@ const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
 
 const deployFunction = async (fileName) => {
-  console.log("here");
   zipFile(fileName);
   const zipContents = fs.readFileSync(`${fileName}.zip`);
-  // spinner.start();
+  spinner.start(`Deploying ${fileName}...`);
   const lambdaRole = await getLambdaRole();
   const params = {
     Code: {
@@ -25,7 +24,7 @@ const deployFunction = async (fileName) => {
   try {
     await lambda.createFunction(params).promise();
     spinner.succeed(
-      `ekko function '${fileName}' successfully deployed to AWS Lambda`
+      `Ekko function '${fileName}' successfully deployed to AWS Lambda`
     );
   } catch (error) {
     spinner.fail(`There was a problem deploying ${fileName}: ${error.message}`);

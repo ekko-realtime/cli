@@ -12,8 +12,8 @@ class NewCommand extends Command {
   }
 }
 
-NewCommand.description = `Create a an ekko_functions directory
-Creates a an ekko_functions directory
+NewCommand.description = `Create an ekko_functions directory containing associations.json
+Creates an ekko_functions directory containing associations.json
 `;
 
 module.exports = NewCommand;

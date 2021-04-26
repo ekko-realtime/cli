@@ -6,7 +6,7 @@ const spinner = ora({ color: "yellow", spinner: "dots" });
 const { deleteLocalFile } = require("./fileUtil");
 
 const updateFunction = async (functionName) => {
-  spinner.start();
+  spinner.start(`Updating ${functionName}...`);
   zipFile(functionName);
   const zipContents = fs.readFileSync(`${functionName}.zip`);
 

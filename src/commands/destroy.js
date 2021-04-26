@@ -16,7 +16,7 @@ class DestroyCommand extends Command {
     {
       name: "functionName",
       required: true,
-      description: "Name of the ekko function that you would like to destroy.",
+      description: "Name of the ekko function that you would like to destroy",
       hidden: false,
       // default: "myEkkoFunction",
     },
@@ -28,8 +28,8 @@ class DestroyCommand extends Command {
   }
 }
 
-DestroyCommand.description = `Delete an ekko function and tear down the associated Lambda.
-Delete an ekko function and tear down the associated Lambda.
+DestroyCommand.description = `Delete an ekko function and tear down the associated Lambda
+Deletes an ekko function and tears down the associated Lambda
 `;
 
 module.exports = DestroyCommand;

@@ -26,8 +26,8 @@ class CreateCommand extends Command {
   }
 }
 
-CreateCommand.description = `Create a local ekko function.
-Creates a local ekko function.
+CreateCommand.description = `Create a local ekko function
+Creates a local ekko function
 `;
 
 module.exports = CreateCommand;

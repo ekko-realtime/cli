@@ -33,7 +33,7 @@ const createEkkoFunctionsDirectory = () => {
         return console.error(err);
       }
     });
-    spinner.succeed("ekko_functions directory created");
+    spinner.succeed("Ekko_functions directory created");
 
     fs.writeFileSync(
       "./ekko_functions/ekkoFunctionTemplate.js",
