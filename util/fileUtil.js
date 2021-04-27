@@ -80,37 +80,23 @@ const createFunction = (functionName) => {
   }
 };
 
-const createEkkoFunctionsDirectory = () => {
+const createBlankEkkoDirectory = () => {
   spinner.start();
-  if (duplicatePath("./ekko_functions")) {
-    spinner.fail(
-      "This directory already contains an ekko_functions directory!"
-    );
+  if (duplicatePath("./ekko")) {
+    spinner.fail("This directory already contains an ekko directory!");
   } else {
-    fs.mkdirSync("./ekko_functions", (err) => {
+    fs.mkdirSync("./ekko", (err) => {
       if (err) {
         return console.error(err);
       }
     });
-    spinner.succeed("ekko_functions directory created");
-
-    fs.writeFileSync(
-      "./ekko_functions/sampleEkkoFunction.js",
-      FUNCTION_TEMPLATE,
-      (err) => {
-        if (err) throw err;
+    fs.mkdirSync("./ekko/apps", (err) => {
+      if (err) {
+        return console.error(err);
       }
-    );
-    spinner.succeed("sampleEkkoFunction.js added to ekko_functions");
+    });
 
-    fs.writeFileSync(
-      "./ekko_functions/associations.json",
-      associations,
-      (err) => {
-        if (err) throw err;
-      }
-    );
-    spinner.succeed("associations.json added to ekko_functions");
+    spinner.succeed("ekko directory created");
   }
 };
 
@@ -124,25 +110,14 @@ const deleteLocalFile = (fileName) => {
           `Successfully deleted ${fileName} from ekko_functions.`
         );
       }
-      // Get the files in current diectory
-      // after deletion
-      // getFilesInDirectory();
     }
   });
 };
 
-// const getFilesInDirectory = () => {
-//   console.log("\nFiles present in directory:");
-//   let files = fs.readdirSync(__dirname);
-//   files.forEach((file) => {
-//     console.log(file);
-//   });
-// };
-
 module.exports = {
   duplicatePath,
   createFile,
-  createEkkoFunctionsDirectory,
+  createBlankEkkoDirectory,
   deleteLocalFile,
   updateAWSCredentials,
   EKKO_ENVIRONMENT_PATH,

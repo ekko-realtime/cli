@@ -1,20 +1,26 @@
 const { Command, flags } = require("@oclif/command");
 const { cli } = require("cli-ux");
 const process = require("process");
-const FileUtil = require("../../util/fileUtil.js");
+const {
+  updateAWSCredentials,
+  createBlankEkkoDirectory,
+} = require("../../util/fileUtil.js");
 const deployFunction = require("../../util/deployFunction.js");
+const ekkoInit = require("../../util/ekkoInit.js");
 
 class InitCommand extends Command {
   async run() {
-    let response = await cli.promt(
-      "Do you want to initialize ekko for a brand new ekko service (newly deployed infrastructure with no existing apps or functions)?"
+    let response = await cli.prompt(
+      "Do you want to initialize ekko for a brand new ekko service (newly deployed infrastructure with no existing apps or functions)(y/n)?"
     );
     response = response.toLowerCase();
 
     if (response === "y") {
-      console.log("new init");
+      // updateAWSCredentials(CONTENT);
+      ekkoInit();
     } else if (response === "n") {
-      console.log("old init");
+      // updateAWSCredentials(CONTENT);
+      createBlankEkkoDirectory();
     }
     // const AWS_ACCESS_KEY_ID = await cli.prompt(
     //   "Please enter your AWS ACCESS KEY ID"
