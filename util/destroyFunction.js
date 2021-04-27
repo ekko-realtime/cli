@@ -11,7 +11,7 @@ const destroyFunction = async (functionName) => {
 
   try {
     await lambda.deleteFunction(params).promise();
-    spinner.succeed(`Lamda '${functionName}' successfully destroyed!`);
+    spinner.succeed(`Lambda '${functionName}' successfully destroyed!`);
     deleteLocalFile(functionName + ".js");
   } catch (error) {
     spinner.fail(`Error tearing down Lambda ${functionName}: ${error}`);

@@ -36,7 +36,6 @@ const saveAWSCredentials = (credentials) => {
 
 const createFile = (path, content) => {
   fs.writeFileSync(path, content, (err) => {
-    spinner.succeed("File was written");
     if (err) throw err;
   });
 };
@@ -75,8 +74,6 @@ const createEkkoFunctionsDirectory = () => {
       }
     );
     spinner.succeed("associations.json added to ekko_functions");
-
-    // FileUtil.createEkkoFunctionsDirectory();
   }
 };
 
@@ -96,8 +93,6 @@ const deleteLocalFile = (fileName) => {
     }
   });
 };
-
-const readFile = () => {};
 
 // const getFilesInDirectory = () => {
 //   console.log("\nFiles present in directory:");
