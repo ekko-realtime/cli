@@ -6,6 +6,14 @@ const spinner = ora({ color: "yellow", spinner: "dots" });
 const EKKO_GLOBAL_DIRECTORY = os.homedir() + "/.ekko";
 const EKKO_ENVIRONMENT_PATH = EKKO_GLOBAL_DIRECTORY + "/.env";
 
+const FUNCTION_TEMPLATE = `exports.handler = async (event) => {
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify("Hello from ekko generated Lambda!"),
+  };
+  return response;
+}`;
+
 const duplicatePath = (path) => {
   if (fs.existsSync(path)) {
     return true;
@@ -40,6 +48,18 @@ const createFile = (path, content) => {
   });
 };
 
+const createFunction = (functionName) => {
+  spinner.start();
+  const PATH = functionName + ".js";
+
+  if (duplicatePath(PATH)) {
+    spinner.fail(`${functionName} already exists. Please specify a new name.`);
+  } else {
+    createFile(PATH, FUNCTION_TEMPLATE);
+    spinner.succeed(`Created ekko function '${functionName}'`);
+  }
+};
+
 const createEkkoFunctionsDirectory = () => {
   spinner.start();
   if (duplicatePath("./ekko_functions")) {
@@ -47,9 +67,6 @@ const createEkkoFunctionsDirectory = () => {
       "This directory already contains an ekko_functions directory!"
     );
   } else {
-    const functionTemplateContent =
-      "exports.handler = async (event) => {\nconst response = {\nstatusCode: 200,\nbody: JSON.stringify('Hello from ekko generated Lambda!'),\n};\nreturn response;\n};";
-
     fs.mkdirSync("./ekko_functions", (err) => {
       if (err) {
         return console.error(err);
@@ -59,7 +76,7 @@ const createEkkoFunctionsDirectory = () => {
 
     fs.writeFileSync(
       "./ekko_functions/ekkoFunctionTemplate.js",
-      functionTemplateContent,
+      FUNCTION_TEMPLATE,
       (err) => {
         if (err) throw err;
       }
@@ -109,4 +126,5 @@ module.exports = {
   deleteLocalFile,
   saveAWSCredentials,
   EKKO_ENVIRONMENT_PATH,
+  createFunction,
 };

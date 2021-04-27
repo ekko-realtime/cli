@@ -6,9 +6,9 @@ class CreateCommand extends Command {
     {
       name: "appName",
       required: true,
-      description: "Name of new ekko realtime application",
+      description:
+        "Name of ekko realtime application that you would like to create JWTs for",
       hidden: false,
-      default: "myEkkoApp",
     },
   ];
   async run() {
@@ -18,8 +18,8 @@ class CreateCommand extends Command {
   }
 }
 
-CreateCommand.description = `Generate JSON Web Tokens for new ekko realtime application
-Generate JSON Web Tokens for new ekko realtime application
+CreateCommand.description = `Generate JsonWebTokens for an ekko realtime application
+Generate JsonWebTokens for an ekko realtime application
 `;
 
 module.exports = CreateCommand;

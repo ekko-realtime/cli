@@ -5,7 +5,7 @@ require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 const SECRET = process.env.SECRET;
 var jwt = require("jsonwebtoken");
 
-console.log("SECRET:", SECRET);
+// console.log("SECRET:", SECRET);
 
 let adminToken = {
   admin: true,
