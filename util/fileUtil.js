@@ -1,5 +1,4 @@
 const fs = require("fs");
-const associations = require("./associationsTemplate.js");
 const os = require("os");
 const { cli } = require("cli-ux");
 const ora = require("ora");
