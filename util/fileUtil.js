@@ -1,10 +1,12 @@
 const fs = require("fs");
 const associations = require("./associationsTemplate.js");
 const os = require("os");
+const { cli } = require("cli-ux");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
 const EKKO_GLOBAL_DIRECTORY = os.homedir() + "/.ekko";
 const EKKO_ENVIRONMENT_PATH = EKKO_GLOBAL_DIRECTORY + "/.env";
+require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 
 const FUNCTION_TEMPLATE = `exports.handler = async (event) => {
   const response = {
@@ -22,7 +24,7 @@ const duplicatePath = (path) => {
   }
 };
 
-const saveAWSCredentials = (credentials) => {
+const updateAWSCredentials = async () => {
   // create .ekko if it does not already exist
   if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
     try {
@@ -33,10 +35,28 @@ const saveAWSCredentials = (credentials) => {
     }
   }
 
-  // append credentials to .ekko/.env
+  // if secret and api endpoint already exist in .env, do not update them
+  const SECRET = process.env.SECRET
+    ? process.env.SECRET
+    : await cli.prompt(
+        "Please enter the JWT secret for your organization's deployed ekko infrastructure"
+      );
+  const API_ENDPOINT = process.env.API_ENDPOINT
+    ? process.env.API_ENDPOINT
+    : await cli.prompt(
+        "Please enter the API Key for your organization's deployed ekko infrastructure"
+      );
+
+  const AWS_ACCESS_KEY_ID = await cli.prompt(
+    "Please enter your AWS ACCESS KEY ID"
+  );
+  const AWS_SECRET_KEY = await cli.prompt("Please enter your AWS SECRET Key");
+  const AWS_REGION = await cli.prompt("Please enter your AWS REGION");
+  const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\nSECRET=${SECRET}\nAPI_ENDPOINT=${API_ENDPOINT}\n`;
+
   try {
-    fs.writeFileSync(EKKO_ENVIRONMENT_PATH, credentials, { flag: "a+" });
-    spinner.succeed("AWS credentials saved to ekko environment");
+    fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES);
+    spinner.succeed("Credentials saved to ekko environment");
   } catch (err) {
     console.error(err);
   }
@@ -72,16 +92,16 @@ const createEkkoFunctionsDirectory = () => {
         return console.error(err);
       }
     });
-    spinner.succeed("Ekko_functions directory created");
+    spinner.succeed("ekko_functions directory created");
 
     fs.writeFileSync(
-      "./ekko_functions/ekkoFunctionTemplate.js",
+      "./ekko_functions/sampleEkkoFunction.js",
       FUNCTION_TEMPLATE,
       (err) => {
         if (err) throw err;
       }
     );
-    spinner.succeed("ekkoFunctionTemplate.js added to ekko_functions");
+    spinner.succeed("sampleEkkoFunction.js added to ekko_functions");
 
     fs.writeFileSync(
       "./ekko_functions/associations.json",
@@ -124,7 +144,7 @@ module.exports = {
   createFile,
   createEkkoFunctionsDirectory,
   deleteLocalFile,
-  saveAWSCredentials,
+  updateAWSCredentials,
   EKKO_ENVIRONMENT_PATH,
   createFunction,
 };
