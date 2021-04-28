@@ -1,7 +1,7 @@
 {
   "name": "ekko-realtime-cli",
   "description": "A command-line tool for ekko, the realtime serverless platform.",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "author": "ekko",
   "bin": {
     "ekko": "./bin/run"
@@ -12,6 +12,7 @@
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.2",
     "cli-ux": "^5.5.1",
+    "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "ora": "^5.4.0"
   },

@@ -1,5 +1,5 @@
 const { Command } = require("@oclif/command");
-const destroyFunction = require("../../util/destroyFunction.js");
+const destroyFunction = require("../util/destroyFunction.js");
 
 class DestroyCommand extends Command {
   static args = [

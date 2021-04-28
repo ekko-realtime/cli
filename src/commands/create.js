@@ -1,5 +1,5 @@
 const { Command } = require("@oclif/command");
-const { createFunction } = require("../../util/fileUtil");
+const { createFunction } = require("../util/fileUtil");
 
 class CreateCommand extends Command {
   static args = [

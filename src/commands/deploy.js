@@ -1,5 +1,5 @@
 const { Command } = require("@oclif/command");
-const deployFunction = require("../../util/deployFunction.js");
+const deployFunction = require("../util/deployFunction.js");
 class DeployCommand extends Command {
   static args = [
     {

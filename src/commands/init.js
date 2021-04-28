@@ -3,8 +3,8 @@ const { cli } = require("cli-ux");
 const {
   updateAWSCredentials,
   createBlankEkkoDirectory,
-} = require("../../util/fileUtil.js");
-const ekkoInit = require("../../util/ekkoInit.js");
+} = require("../util/fileUtil.js");
+const ekkoInit = require("../util/ekkoInit.js");
 
 class InitCommand extends Command {
   async run() {

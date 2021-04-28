@@ -1,5 +1,5 @@
 const { Command } = require("@oclif/command");
-const { generateJWT, verifyJWT } = require("../../util/generateJWT");
+const { generateJWT, verifyJWT } = require("../util/generateJWT");
 
 class CreateCommand extends Command {
   static args = [

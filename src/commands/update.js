@@ -1,9 +1,9 @@
 const { Command } = require("@oclif/command");
-const updateFunction = require("../../util/updateFunction.js");
-const { updateAssociations } = require("../../util/s3.js");
-const { listObjects } = require("../../util/s3.js");
-const { listBuckets } = require("../../util/s3.js");
-const { getAssociations } = require("../../util/s3.js");
+const updateFunction = require("../util/updateFunction.js");
+const { updateAssociations } = require("../util/s3.js");
+const { listObjects } = require("../util/s3.js");
+const { listBuckets } = require("../util/s3.js");
+const { getAssociations } = require("../util/s3.js");
 
 class UpdateCommand extends Command {
   static args = [
