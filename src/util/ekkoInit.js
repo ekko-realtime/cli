@@ -6,8 +6,8 @@ const spinner = ora({ color: "yellow", spinner: "dots" });
 
 const ekkoInit = () => {
   spinner.start("Downloading ekko directory...");
-  childProcess.execSync(`git clone -q '${repo}'`);
-  process.chdir("./ekko-init");
+  childProcess.execSync(`git clone -q '${repo}' ekko`);
+  process.chdir("./ekko");
   childProcess.execSync("rm -rf .git");
   spinner.succeed("New ekko directory successfully created");
 };
