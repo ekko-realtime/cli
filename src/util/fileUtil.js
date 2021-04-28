@@ -23,6 +23,20 @@ const duplicatePath = (path) => {
   }
 };
 
+const createEkkoGlobalDirectory = () => {
+  spinner.start("Creating ekko global directory...");
+  if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
+    try {
+      fs.mkdirSync(EKKO_GLOBAL_DIRECTORY);
+      spinner.succeed("Ekko global directory created");
+    } catch (err) {
+      throw err;
+    }
+  } else {
+    spinner.succeed("Ekko global directory already exists");
+  }
+};
+
 const updateAWSCredentials = async () => {
   // create .ekko if it does not already exist
   if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
@@ -121,4 +135,6 @@ module.exports = {
   updateAWSCredentials,
   EKKO_ENVIRONMENT_PATH,
   createFunction,
+  createEkkoGlobalDirectory,
+  EKKO_GLOBAL_DIRECTORY,
 };
