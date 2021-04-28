@@ -14,10 +14,10 @@ class InitCommand extends Command {
     response = response.toLowerCase();
 
     if (response === "y") {
-      updateAWSCredentials(CONTENT);
+      updateAWSCredentials();
       ekkoInit();
     } else if (response === "n") {
-      updateAWSCredentials(CONTENT);
+      updateAWSCredentials();
       createBlankEkkoDirectory();
     }
   }
