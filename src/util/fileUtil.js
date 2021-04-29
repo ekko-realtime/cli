@@ -54,17 +54,6 @@ const provideAWSCredentials = async () => {
   }
 };
 
-// const createEkkoGlobalDirectory = () => {
-//   if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
-//     try {
-//       fs.mkdirSync(EKKO_GLOBAL_DIRECTORY);
-//       console.log("Ekko global directory created");
-//     } catch (err) {
-//       throw err;
-//     }
-//   }
-// };
-
 const updateAWSCredentials = async () => {
   // create .ekko if it does not already exist
   createEkkoGlobalDirectory();
