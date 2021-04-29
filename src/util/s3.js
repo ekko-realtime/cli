@@ -22,7 +22,7 @@ s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 const updateAssociations = async () => {
   spinner.start("Updating associations.json on AWS S3...");
   var uploadParams = {
-    Bucket: "cf-templates-yzwm21thtzcu-us-east-1",
+    Bucket: process.env.S3_BUCKET,
     Key: ASSOCIATIONS,
     Body: "",
   };
@@ -77,7 +77,7 @@ const listBuckets = async () => {
 
 const getAssociations = async () => {
   var params = {
-    Bucket: "cf-templates-yzwm21thtzcu-us-east-1",
+    Bucket: process.env.S3_BUCKET,
     Key: ASSOCIATIONS,
   };
   s3.getObject(params, function (err, data) {

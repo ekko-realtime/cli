@@ -37,16 +37,37 @@ const createEkkoGlobalDirectory = () => {
   }
 };
 
+const provideAWSCredentials = async () => {
+  createEkkoGlobalDirectory();
+  const AWS_ACCESS_KEY_ID = await cli.prompt(
+    "Please enter your AWS ACCESS KEY ID"
+  );
+  const AWS_SECRET_KEY = await cli.prompt("Please enter your AWS SECRET Key");
+  const AWS_REGION = await cli.prompt("Please enter your AWS REGION");
+  const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\n`;
+
+  try {
+    fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES);
+    spinner.succeed("Credentials saved to ekko environment");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// const createEkkoGlobalDirectory = () => {
+//   if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
+//     try {
+//       fs.mkdirSync(EKKO_GLOBAL_DIRECTORY);
+//       console.log("Ekko global directory created");
+//     } catch (err) {
+//       throw err;
+//     }
+//   }
+// };
+
 const updateAWSCredentials = async () => {
   // create .ekko if it does not already exist
-  if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
-    try {
-      fs.mkdirSync(EKKO_GLOBAL_DIRECTORY);
-      console.log("Ekko global directory created");
-    } catch (err) {
-      throw err;
-    }
-  }
+  createEkkoGlobalDirectory();
 
   // if secret and api endpoint already exist in .env, do not update them
   const SECRET = process.env.SECRET
@@ -137,4 +158,5 @@ module.exports = {
   createFunction,
   createEkkoGlobalDirectory,
   EKKO_GLOBAL_DIRECTORY,
+  provideAWSCredentials,
 };

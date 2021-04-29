@@ -3,15 +3,19 @@ const childProcess = require("child_process");
 const { spawnSync } = require("child_process");
 const {
   createEkkoGlobalDirectory,
-  updateAWSCredentials,
+  provideAWSCredentials,
   EKKO_GLOBAL_DIRECTORY,
 } = require("../util/fileUtil.js");
 const DEPLOY_DIRECTORY = `${EKKO_GLOBAL_DIRECTORY}/deploy`;
 const CDK_OUTPUTS_PATH = `${EKKO_GLOBAL_DIRECTORY}/cdk_outputs.json`;
-const parseCdkOutputs = require("./cdkOutputs");
+const cdkOutputs = require("./cdkOutputs");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
 const DEPLOY_REPO = "https://github.com/ekko-live/deploy.git";
+const ekkoInit = require("../util/ekkoInit.js");
+const Deploy = require("../util/deploy.js");
+const os = require("os");
+
 /*
 before running ekko init
   - install aws-cli
@@ -33,15 +37,10 @@ get AWS credentials from dev and write to .env
 create ekko directory
 */
 
-const ekkoDeploy = () => {
-  spinner.start("spinning");
-  setTimeout(() => {
-    spinner.succeed("spun!");
-  }, 3000);
-
-  // updateAWSCredentials();
-  // createEkkoGlobalDirectory();
-
+const ekkoDeploy = async () => {
+  const CWD = process.cwd();
+  console.log(CWD);
+  await provideAWSCredentials();
   process.chdir(EKKO_GLOBAL_DIRECTORY);
   spinner.start(`Cloning ${DEPLOY_REPO}`);
   childProcess.execSync(`git clone -q '${DEPLOY_REPO}' ~/.ekko/deploy`);
@@ -53,9 +52,11 @@ const ekkoDeploy = () => {
   spinner.start("Installing deployment dependencies...");
   childProcess.execSync("npm install");
   spinner.succeed("Deployment dependencies installed");
-  spinner.start("Bootstrapping cdk deployment...");
+  spinner.start(
+    "Deploying temporary resources to bootstrap your AWS deployments..."
+  );
   spawnSync("cdk", ["bootstrap"]);
-  spinner.succeed("cdk depolyment successfully bootstrapped");
+  spinner.succeed("Bootstrapping complete");
   spinner.start(
     "Deploying AWS infrastructure with cdk. This could take 15 minutes or more...\n"
   );
@@ -68,10 +69,13 @@ const ekkoDeploy = () => {
     "never",
   ]);
   spinner.succeed("AWS infrastructure successfully deployed");
-
-  // spinner.start("Parsing cdk outputs...");
-  // process.chdir("~/.ekko");
-  // parseCdkOutputs();
+  process.chdir(os.homedir());
+  process.chdir(CWD);
+  ekkoInit();
+  spinner.start("Parsing cdk outputs...");
+  cdkOutputs.writeToEnv();
+  spinner.succeed("cdk outputs written to ekko environment");
+  cdkOutputs.logValues();
 };
 
 module.exports = ekkoDeploy;
