@@ -1,5 +1,5 @@
 const { Command } = require("@oclif/command");
-const destroyFunction = require("../util/destroyFunction.js");
+const EkkoFunction = require("../util/ekkoFunction.js");
 
 class DestroyCommand extends Command {
   static args = [
@@ -13,7 +13,7 @@ class DestroyCommand extends Command {
   async run() {
     const { args } = this.parse(DestroyCommand);
 
-    destroyFunction(args.functionName);
+    EkkoFunction.destroy(args.functionName);
   }
 }
 

@@ -13,7 +13,6 @@ const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
 const DEPLOY_REPO = "https://github.com/ekko-live/deploy.git";
 const ekkoInit = require("../util/ekkoInit.js");
-const Deploy = require("../util/deploy.js");
 const os = require("os");
 
 /*

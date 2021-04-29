@@ -1,5 +1,5 @@
 const { Command } = require("@oclif/command");
-const deployFunction = require("../util/deployFunction.js");
+const EkkoFunction = require("../util/ekkoFunction.js");
 class DeployCommand extends Command {
   static args = [
     {
@@ -13,7 +13,7 @@ class DeployCommand extends Command {
 
   async run() {
     const { args } = this.parse(DeployCommand);
-    deployFunction(args.functionName);
+    EkkoFunction.deploy(args.functionName);
   }
 }
 
