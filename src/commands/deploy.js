@@ -4,7 +4,7 @@ class DeployCommand extends Command {
   static args = [
     {
       name: "functionName",
-      required: false,
+      required: true,
       description: "Name of Function you would like to deploy.",
       hidden: false,
       // default: "myEkkoFunction",

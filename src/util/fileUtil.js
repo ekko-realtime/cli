@@ -69,7 +69,7 @@ const updateAWSCredentials = async () => {
   // create .ekko if it does not already exist
   createEkkoGlobalDirectory();
 
-  // if secret and api endpoint already exist in .env, do not update them
+  // if secret, api endpoint, and s3 already exist in .env, do not update them
   const SECRET = process.env.SECRET
     ? process.env.SECRET
     : await cli.prompt(
@@ -81,12 +81,18 @@ const updateAWSCredentials = async () => {
         "Please enter the API Key for your organization's deployed ekko infrastructure"
       );
 
+  const S3_BUCKET = process.env.S3_BUCKET
+    ? process.env.S3_BUCKET
+    : await cli.prompt(
+        "Please enter the name of the S3 bucket where your organization's associations.json is stored"
+      );
+
   const AWS_ACCESS_KEY_ID = await cli.prompt(
     "Please enter your AWS ACCESS KEY ID"
   );
   const AWS_SECRET_KEY = await cli.prompt("Please enter your AWS SECRET Key");
   const AWS_REGION = await cli.prompt("Please enter your AWS REGION");
-  const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\nSECRET=${SECRET}\nAPI_ENDPOINT=${API_ENDPOINT}\n`;
+  const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\nSECRET=${SECRET}\nAPI_ENDPOINT=${API_ENDPOINT}\nS3_BUCKET=${S3_BUCKET}\n`;
 
   try {
     fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES);
