@@ -4,8 +4,7 @@ const {
   updateAWSCredentials,
   createBlankEkkoDirectory,
 } = require("../util/fileUtil.js");
-// const ekkoInit = require("../util/ekkoInit.js");
-const ekkoDeploy = require("../util/ekkoDeploy.js");
+const EkkoInit = require("../util/ekkoInit.js");
 
 class InitCommand extends Command {
   async run() {
@@ -15,10 +14,9 @@ class InitCommand extends Command {
     response = response.toLowerCase();
 
     if (response === "y") {
-      ekkoDeploy();
+      EkkoInit.newDeployment();
     } else if (response === "n") {
-      await updateAWSCredentials();
-      createBlankEkkoDirectory();
+      EkkoInit.existingDeployment();
     }
   }
 }

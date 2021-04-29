@@ -33,7 +33,7 @@ const createEkkoGlobalDirectory = () => {
       throw err;
     }
   } else {
-    spinner.succeed("Ekko global directory already exists");
+    spinner.succeed("~/.ekko already exists");
   }
 };
 
