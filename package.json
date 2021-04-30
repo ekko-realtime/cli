@@ -1,7 +1,7 @@
 {
   "name": "ekko-realtime-cli",
   "description": "A command-line tool for ekko, the realtime serverless platform.",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "author": "ekko",
   "bin": {
     "ekko": "./bin/run"
