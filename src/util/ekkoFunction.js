@@ -1,27 +1,29 @@
 const zipFile = require("./zipFile");
 const fs = require("fs");
-const getLambdaRole = require("./getLambdaRole");
+// const getLambdaRole = require("./getLambdaRole");
 const lambda = require("./lambda");
 const {
   deleteLocalFile,
   getFiles,
   deleteLocalDirectory,
 } = require("./fileUtil");
+const process = require("process");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
+const LAMBDA_ROLE_ARN = process.env.LAMBDA_ROLE_ARN;
 
 const deploy = async (fileName) => {
   zipFile(fileName);
   const zipContents = fs.readFileSync(`${fileName}.zip`);
   spinner.start(`Deploying ${fileName}...`);
-  const lambdaRole = await getLambdaRole();
+  // const lambdaRole = await getLambdaRole();
   const params = {
     Code: {
       ZipFile: zipContents,
     },
     FunctionName: fileName,
     Handler: `${fileName}.handler`,
-    Role: lambdaRole.Role.Arn,
+    Role: LAMBDA_ROLE_ARN,
     Runtime: "nodejs14.x",
   };
 
@@ -94,7 +96,7 @@ const getLambdas = async () => {
 const getEkkoLambdas = async () => {
   const lambdas = await getLambdas();
   const ekkoLambdas = lambdas.Functions.filter((lambda) =>
-    lambda.Role.includes("lambda_basic_execution")
+    lambda.Role.includes("ekko-server")
   );
 
   return ekkoLambdas.map((lambda) => lambda.FunctionName);
