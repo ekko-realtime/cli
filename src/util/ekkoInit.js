@@ -44,7 +44,7 @@ const existingDeployment = async () => {
 };
 
 const newDeployment = async () => {
-  provideAWSCredentials();
+  await provideAWSCredentials();
   cloneDeployRepo();
   installCDK();
   deployAWSInfrastructure();

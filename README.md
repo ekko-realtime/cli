@@ -19,7 +19,7 @@ $ npm install -g ekko-realtime-cli
 $ ekko COMMAND
 running command...
 $ ekko (-v|--version|version)
-ekko-realtime-cli/0.0.12 darwin-x64 node-v14.15.0
+ekko-realtime-cli/0.0.13 darwin-x64 node-v14.15.0
 $ ekko --help [COMMAND]
 USAGE
   $ ekko COMMAND
@@ -52,7 +52,7 @@ DESCRIPTION
   Updates ekko-cli to use new AWS credentials
 ```
 
-_See code: [src/commands/config.js](https://github.com/ekko-live/cli/blob/v0.0.12/src/commands/config.js)_
+_See code: [src/commands/config.js](https://github.com/ekko-live/cli/blob/v0.0.13/src/commands/config.js)_
 
 ## `ekko create FUNCTIONNAME`
 
@@ -63,13 +63,13 @@ USAGE
   $ ekko create FUNCTIONNAME
 
 ARGUMENTS
-  FUNCTIONNAME  [default: myEkkoFunction] Name of new ekko function.
+  FUNCTIONNAME  Name of new ekko function.
 
 DESCRIPTION
   Creates a local ekko function
 ```
 
-_See code: [src/commands/create.js](https://github.com/ekko-live/cli/blob/v0.0.12/src/commands/create.js)_
+_See code: [src/commands/create.js](https://github.com/ekko-live/cli/blob/v0.0.13/src/commands/create.js)_
 
 ## `ekko deploy FUNCTIONNAME`
 
@@ -87,7 +87,7 @@ DESCRIPTION
   Deploys an ekko function to AWS Lambda
 ```
 
-_See code: [src/commands/deploy.js](https://github.com/ekko-live/cli/blob/v0.0.12/src/commands/deploy.js)_
+_See code: [src/commands/deploy.js](https://github.com/ekko-live/cli/blob/v0.0.13/src/commands/deploy.js)_
 
 ## `ekko destroy FUNCTIONNAME`
 
@@ -104,7 +104,7 @@ DESCRIPTION
   Deletes an ekko function and tears down the associated Lambda
 ```
 
-_See code: [src/commands/destroy.js](https://github.com/ekko-live/cli/blob/v0.0.12/src/commands/destroy.js)_
+_See code: [src/commands/destroy.js](https://github.com/ekko-live/cli/blob/v0.0.13/src/commands/destroy.js)_
 
 ## `ekko help [COMMAND]`
 
@@ -137,7 +137,7 @@ DESCRIPTION
   deploy a new ekko infratructure enter 'y'.
 ```
 
-_See code: [src/commands/init.js](https://github.com/ekko-live/cli/blob/v0.0.12/src/commands/init.js)_
+_See code: [src/commands/init.js](https://github.com/ekko-live/cli/blob/v0.0.13/src/commands/init.js)_
 
 ## `ekko jwt APPNAME`
 
@@ -154,7 +154,7 @@ DESCRIPTION
   Generate JsonWebTokens for an ekko realtime application
 ```
 
-_See code: [src/commands/jwt.js](https://github.com/ekko-live/cli/blob/v0.0.12/src/commands/jwt.js)_
+_See code: [src/commands/jwt.js](https://github.com/ekko-live/cli/blob/v0.0.13/src/commands/jwt.js)_
 
 ## `ekko status`
 
@@ -168,7 +168,7 @@ DESCRIPTION
   Lists your ekko functions and their deployment status
 ```
 
-_See code: [src/commands/status.js](https://github.com/ekko-live/cli/blob/v0.0.12/src/commands/status.js)_
+_See code: [src/commands/status.js](https://github.com/ekko-live/cli/blob/v0.0.13/src/commands/status.js)_
 
 ## `ekko test`
 
@@ -183,7 +183,7 @@ DESCRIPTION
   Testing purposes
 ```
 
-_See code: [src/commands/test.js](https://github.com/ekko-live/cli/blob/v0.0.12/src/commands/test.js)_
+_See code: [src/commands/test.js](https://github.com/ekko-live/cli/blob/v0.0.13/src/commands/test.js)_
 
 ## `ekko update FILENAME`
 
@@ -200,5 +200,5 @@ DESCRIPTION
   Update associations.json or an AWS lambda associated with the local ekko function
 ```
 
-_See code: [src/commands/update.js](https://github.com/ekko-live/cli/blob/v0.0.12/src/commands/update.js)_
+_See code: [src/commands/update.js](https://github.com/ekko-live/cli/blob/v0.0.13/src/commands/update.js)_
 <!-- commandsstop -->
