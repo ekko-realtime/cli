@@ -6,8 +6,7 @@ const EkkoFunction = require("../util/ekkoFunction.js");
 
 class TestCommand extends Command {
   async run() {
-    EkkoFunction.listEkkoLambdas();
-    EkkoFunction.listEkkoFunctions();
+    await EkkoFunction.listFunctionsStatus();
   }
 }
 

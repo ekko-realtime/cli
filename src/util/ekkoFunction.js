@@ -4,7 +4,7 @@ const getLambdaRole = require("./getLambdaRole");
 const lambda = require("./lambda");
 const {
   deleteLocalFile,
-  getEkkoFunctions,
+  getFiles,
   deleteLocalDirectory,
 } = require("./fileUtil");
 const ora = require("ora");
@@ -91,30 +91,52 @@ const getLambdas = async () => {
     .promise();
 };
 
-const listEkkoLambdas = async () => {
+const getEkkoLambdas = async () => {
   const lambdas = await getLambdas();
-  console.log(lambdas);
   const ekkoLambdas = lambdas.Functions.filter((lambda) =>
     lambda.Role.includes("lambda_basic_execution")
   );
 
-  console.log(ekkoLambdas);
+  return ekkoLambdas.map((lambda) => lambda.FunctionName);
 };
 
-const listEkkoFunctions = () => {
-  const files = getEkkoFunctions();
-  let functions = files.filter((file) => !file.match(/.json/));
-  const functionNames = functions.map((func) => func.slice(0, -3));
+const getEkkoFunctions = () => {
+  const files = getFiles();
+  return files.filter(
+    (file) => !file.match(/.json/) && !file.match(/.DS_Store/)
+  );
 
-  console.log(functionNames);
+  // console.log("Ekko Functions:");
+  // functions.forEach((func) => console.log(func));
+};
+
+const listFunctionsStatus = async () => {
+  spinner.start("Getting the status of your ekko functions...");
+  const lambdas = await getEkkoLambdas();
+  let functions = getEkkoFunctions();
+
+  functions = functions.map((func) => {
+    if (lambdas.includes(func)) {
+      return func + " (deployed)";
+    } else {
+      return func;
+    }
+  });
+
+  functions.sort();
+
+  spinner.stop();
+  console.log("Ekko Functions:");
+  functions.forEach((func) => console.log(func));
 };
 
 module.exports = {
   deploy,
   destroy,
   update,
-  listEkkoLambdas,
-  listEkkoFunctions,
+  getEkkoLambdas,
+  getEkkoFunctions,
+  listFunctionsStatus,
 };
 
 /*

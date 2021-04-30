@@ -23,9 +23,8 @@ const duplicatePath = (path) => {
   }
 };
 
-const getEkkoFunctions = () => {
+const getFiles = () => {
   let files = fs.readdirSync(".");
-
   return files;
 };
 
@@ -180,6 +179,6 @@ module.exports = {
   createEkkoGlobalDirectory,
   EKKO_GLOBAL_DIRECTORY,
   provideAWSCredentials,
-  getEkkoFunctions,
+  getFiles,
   deleteLocalDirectory,
 };
