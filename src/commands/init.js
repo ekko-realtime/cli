@@ -18,9 +18,9 @@ class InitCommand extends Command {
     response = response.toLowerCase();
 
     if (response === "y") {
-      EkkoInit.newDeployment();
+      await EkkoInit.newDeployment();
     } else if (response === "n") {
-      EkkoInit.existingDeployment();
+      await EkkoInit.existingDeployment();
     }
 
     console.log("");
