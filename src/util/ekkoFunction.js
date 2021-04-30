@@ -25,6 +25,7 @@ const deploy = async (fileName) => {
     Handler: `${fileName}.handler`,
     Role: LAMBDA_ROLE_ARN,
     Runtime: "nodejs14.x",
+    Tags: { service: "ekko" },
   };
 
   try {
