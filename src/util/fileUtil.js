@@ -116,6 +116,8 @@ const createFunction = (functionName) => {
   fs.writeFileSync("index.js", FUNCTION_TEMPLATE, (err) => {
     if (err) throw err;
   });
+
+  spinner.succeed(`Ekko function ${functionName} successfully created!`);
 };
 
 const createBlankEkkoDirectory = () => {
@@ -139,17 +141,32 @@ const createBlankEkkoDirectory = () => {
 };
 
 const deleteLocalFile = (fileName) => {
+  // console.log("FILE", fileName);
   fs.unlink(fileName, (err) => {
     if (err)
-      spinner.fail(`Error deleting ${filename} from ekko_functions:`, err);
+      spinner.fail(`Error deleting ${fileName} from ekko_functions:`, err);
     else {
       if (fileName.includes(".js")) {
-        spinner.succeed(
-          `Successfully deleted ${fileName} from ekko_functions.`
-        );
+        spinner.succeed`Successfully deleted ${fileName} from ekko_functions.`();
       }
     }
   });
+};
+
+const deleteLocalDirectory = (name) => {
+  fs.rmdir(
+    name,
+    {
+      recursive: true,
+    },
+    (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(`Local ekko function '${name}' successfully deleted`);
+      }
+    }
+  );
 };
 
 module.exports = {
@@ -164,4 +181,5 @@ module.exports = {
   EKKO_GLOBAL_DIRECTORY,
   provideAWSCredentials,
   getEkkoFunctions,
+  deleteLocalDirectory,
 };

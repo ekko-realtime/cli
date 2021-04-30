@@ -2,7 +2,11 @@ const zipFile = require("./zipFile");
 const fs = require("fs");
 const getLambdaRole = require("./getLambdaRole");
 const lambda = require("./lambda");
-const { deleteLocalFile, getEkkoFunctions } = require("./fileUtil");
+const {
+  deleteLocalFile,
+  getEkkoFunctions,
+  deleteLocalDirectory,
+} = require("./fileUtil");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
 
@@ -42,10 +46,11 @@ const destroy = async (functionName) => {
   try {
     await lambda.deleteFunction(params).promise();
     spinner.succeed(`Lambda '${functionName}' successfully destroyed!`);
-    deleteLocalFile(functionName + ".js");
   } catch (error) {
     spinner.fail(`Error tearing down Lambda ${functionName}: ${error}`);
   }
+
+  deleteLocalDirectory(functionName);
 };
 
 const update = async (functionName) => {
