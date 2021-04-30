@@ -1,5 +1,6 @@
 const { Command } = require("@oclif/command");
 const { updateAssociations } = require("../util/s3.js");
+const updateServer = require("../util/updateAssociations.js");
 const EkkoFunction = require("../util/ekkoFunction.js");
 const { listObjects } = require("../util/s3.js");
 const { listBuckets } = require("../util/s3.js");
@@ -20,8 +21,10 @@ class UpdateCommand extends Command {
 
     if (args.fileName === "associations.json") {
       // console.log("updating associations.json");
-      // updateAssociations();
-      listObjects();
+      updateAssociations();
+      updateServer();
+
+      // listObjects();
       // listBuckets();
       // getAssociations();
     } else {

@@ -24,6 +24,13 @@ const generateJWT = (appName) => {
   spinner.succeed(`Admin JsonWebToken successfully created ${adminToken}`);
 };
 
+const generateAssociationsJWT = (associations) => {
+  const token = jwt.sign(associations, SECRET);
+  // const verified = jwt.verify(token, SECRET);
+  // console.log("verified", verified);
+  return token;
+};
+
 const verifyJWT = () => {
   const USER = jwt.verify(userToken, SECRET);
   const ADMIN = jwt.verify(adminToken, SECRET);
@@ -32,4 +39,4 @@ const verifyJWT = () => {
   console.log("Decoded admin token:", ADMIN);
 };
 
-module.exports = { generateJWT, verifyJWT };
+module.exports = { generateJWT, verifyJWT, generateAssociationsJWT };
