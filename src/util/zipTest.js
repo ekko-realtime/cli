@@ -8,7 +8,7 @@ const zipFile = (filename) => {
   // console.log(path);
 
   try {
-    childProcess.execSync(`zip -r ${filename} ${filename}`);
+    childProcess.execSync(`zip ${filename} ${filename}`);
   } catch (error) {
     spinner.fail(`Error zipping file ${filename}: ${error.message}`);
   }

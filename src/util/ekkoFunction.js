@@ -2,7 +2,7 @@ const zipFile = require("./zipFile");
 const fs = require("fs");
 const getLambdaRole = require("./getLambdaRole");
 const lambda = require("./lambda");
-const { deleteLocalFile } = require("./fileUtil");
+const { deleteLocalFile, getEkkoFunctions } = require("./fileUtil");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
 
@@ -68,4 +68,50 @@ const update = async (functionName) => {
   deleteLocalFile(functionName + ".zip");
 };
 
-module.exports = { deploy, destroy, update };
+const getLambdas = async () => {
+  var params = {
+    // FunctionVersion: ALL,
+    // Marker: 'STRING_VALUE',
+    // // MasterRegion: 'STRING_VALUE',
+    // // MaxItems: 'NUMBER_VALUE'
+  };
+
+  return lambda
+    .listFunctions(params, (err, data) => {
+      if (err) console.log(err, err.stack);
+      // an error occurred
+      // else console.log(data.Functions); // successful response
+      return data.Functions;
+    })
+    .promise();
+};
+
+const listEkkoLambdas = async () => {
+  const lambdas = await getLambdas();
+  console.log(lambdas);
+  const ekkoLambdas = lambdas.Functions.filter((lambda) =>
+    lambda.Role.includes("lambda_basic_execution")
+  );
+
+  console.log(ekkoLambdas);
+};
+
+const listEkkoFunctions = () => {
+  const files = getEkkoFunctions();
+  let functions = files.filter((file) => !file.match(/.json/));
+  const functionNames = functions.map((func) => func.slice(0, -3));
+
+  console.log(functionNames);
+};
+
+module.exports = {
+  deploy,
+  destroy,
+  update,
+  listEkkoLambdas,
+  listEkkoFunctions,
+};
+
+/*
+
+*/

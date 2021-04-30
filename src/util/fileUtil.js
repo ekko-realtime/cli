@@ -23,6 +23,12 @@ const duplicatePath = (path) => {
   }
 };
 
+const getEkkoFunctions = () => {
+  let files = fs.readdirSync(".");
+
+  return files;
+};
+
 const createEkkoGlobalDirectory = () => {
   spinner.start("Creating ekko global directory...");
   if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
@@ -98,15 +104,18 @@ const createFile = (path, content) => {
 };
 
 const createFunction = (functionName) => {
-  spinner.start();
-  const PATH = functionName + ".js";
+  spinner.start("Creating function...");
+  fs.mkdirSync(`./${functionName}`, (err) => {
+    if (err) {
+      spinner.fail();
+      return console.error(err);
+    }
+  });
+  process.chdir(functionName);
 
-  if (duplicatePath(PATH)) {
-    spinner.fail(`${functionName} already exists. Please specify a new name.`);
-  } else {
-    createFile(PATH, FUNCTION_TEMPLATE);
-    spinner.succeed(`Created ekko function '${functionName}'`);
-  }
+  fs.writeFileSync("index.js", FUNCTION_TEMPLATE, (err) => {
+    if (err) throw err;
+  });
 };
 
 const createBlankEkkoDirectory = () => {
@@ -154,4 +163,5 @@ module.exports = {
   createEkkoGlobalDirectory,
   EKKO_GLOBAL_DIRECTORY,
   provideAWSCredentials,
+  getEkkoFunctions,
 };

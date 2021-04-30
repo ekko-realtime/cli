@@ -6,7 +6,8 @@ require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 const region = process.env.AWS_REGION;
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
-const ASSOCIATIONS = "./associations.json";
+const ASSOCIATIONS = "associations.json";
+const S3_BUCKET = process.env.S3_BUCKET;
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -22,7 +23,7 @@ s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 const updateAssociations = async () => {
   spinner.start("Updating associations.json on AWS S3...");
   var uploadParams = {
-    Bucket: process.env.S3_BUCKET,
+    Bucket: S3_BUCKET,
     Key: ASSOCIATIONS,
     Body: "",
   };
@@ -49,7 +50,7 @@ const updateAssociations = async () => {
 
 const listObjects = async () => {
   var bucketParams = {
-    Bucket: "cf-templates-yzwm21thtzcu-us-east-1",
+    Bucket: S3_BUCKET,
   };
 
   // Call S3 to obtain a list of the objects in the bucket
@@ -77,7 +78,7 @@ const listBuckets = async () => {
 
 const getAssociations = async () => {
   var params = {
-    Bucket: process.env.S3_BUCKET,
+    Bucket: S3_BUCKET,
     Key: ASSOCIATIONS,
   };
   s3.getObject(params, function (err, data) {

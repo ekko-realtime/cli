@@ -20,8 +20,8 @@ class UpdateCommand extends Command {
 
     if (args.fileName === "associations.json") {
       // console.log("updating associations.json");
-      updateAssociations();
-      // listObjects();
+      // updateAssociations();
+      listObjects();
       // listBuckets();
       // getAssociations();
     } else {
