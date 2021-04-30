@@ -7,13 +7,10 @@ const EKKO_GLOBAL_DIRECTORY = os.homedir() + "/.ekko";
 const EKKO_ENVIRONMENT_PATH = EKKO_GLOBAL_DIRECTORY + "/.env";
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 
-const FUNCTION_TEMPLATE = `exports.handler = async (event) => {
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify("Hello from ekko generated Lambda!"),
-  };
-  return response;
-}`;
+const FUNCTION_TEMPLATE = `exports.handler = async (message) => {
+  // Implement ekko function
+  return message;
+};`;
 
 const duplicatePath = (path) => {
   if (fs.existsSync(path)) {
@@ -116,7 +113,9 @@ const createFunction = (functionName) => {
     if (err) throw err;
   });
 
-  spinner.succeed(`Ekko function ${functionName} successfully created!`);
+  spinner.succeed(
+    `Ekko function ${functionName} successfully created in ${process.cwd()}`
+  );
 };
 
 const createBlankEkkoDirectory = () => {

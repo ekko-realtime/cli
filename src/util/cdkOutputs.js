@@ -43,10 +43,15 @@ const writeToEnv = () => {
 };
 
 const logValues = () => {
-  const { API_ENDPOINT, SECRET } = getCdkOutputs();
-  spinner.succeed(`Generating values for your server and client code:`);
-  spinner.succeed(`Your ekko server API key: ${API_ENDPOINT}`);
-  spinner.succeed(`Your ekko server JsonWebToken Secret: ${SECRET}`);
+  const { API_ENDPOINT } = getCdkOutputs();
+  console.log("");
+  spinner.succeed(`Grabbing your ekko server API endpoint...`);
+  console.log("");
+  console.log(
+    "Copy this ekko server API endpoint and use it to create ekko client instances:"
+  );
+  console.log(API_ENDPOINT);
+  console.log("");
 };
 
 module.exports = { writeToEnv, logValues };

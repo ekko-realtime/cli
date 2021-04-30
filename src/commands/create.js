@@ -8,7 +8,7 @@ class CreateCommand extends Command {
       required: true,
       description: "Name of new ekko function.",
       hidden: false,
-      default: "myEkkoFunction",
+      // default: "myEkkoFunction",
     },
   ];
   async run() {

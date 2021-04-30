@@ -54,27 +54,38 @@ const newDeployment = async () => {
 
 const cloneDeployRepo = () => {
   process.chdir(EKKO_GLOBAL_DIRECTORY);
+  console.log("");
   spinner.start(`Cloning ${DEPLOY_REPO}`);
+  console.log("");
   childProcess.execSync(`git clone -q '${DEPLOY_REPO}' ~/.ekko/deploy`);
   spinner.succeed(`${DEPLOY_REPO} successfully cloned`);
+  console.log("");
 };
 
 const installCDK = () => {
   process.chdir(DEPLOY_DIRECTORY);
+  console.log("");
   spinner.start("Installing aws-cdk...");
+  console.log("");
   childProcess.execSync("npm install -g aws-cdk");
   spinner.succeed("aws-cdk successfully installed");
+  console.log("");
   spinner.start("Installing deployment dependencies...");
+  console.log("");
   childProcess.execSync("npm install");
   spinner.succeed("Deployment dependencies installed");
+  console.log("");
 };
 
 const deployAWSInfrastructure = () => {
+  console.log("");
   spinner.start(
     "Deploying temporary resources to bootstrap your AWS deployments..."
   );
+  console.log("");
   spawnSync("cdk", ["bootstrap"]);
   spinner.succeed("Bootstrapping complete");
+  console.log("");
   spinner.start(
     "Deploying AWS infrastructure with cdk. This could take 15 minutes or more...\n"
   );
@@ -86,23 +97,31 @@ const deployAWSInfrastructure = () => {
     "--require-approval",
     "never",
   ]);
+  console.log("");
   spinner.succeed("AWS infrastructure successfully deployed");
+  console.log("");
 };
 
 const createEkkoDirectory = (CWD) => {
   process.chdir(os.homedir());
   process.chdir(CWD);
+  console.log("");
   spinner.start("Downloading ekko directory...");
+  console.log("");
   childProcess.execSync(`git clone -q '${repo}' ekko`);
   process.chdir("./ekko");
   childProcess.execSync("rm -rf .git");
   spinner.succeed("New ekko directory successfully created");
+  console.log("");
 };
 
 const handleCDKOutputs = () => {
+  console.log("");
   spinner.start("Parsing cdk outputs...");
+  console.log("");
   cdkOutputs.writeToEnv();
   spinner.succeed("cdk outputs written to ekko environment");
+  console.log("");
   cdkOutputs.logValues();
 };
 

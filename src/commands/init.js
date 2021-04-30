@@ -11,6 +11,7 @@ class InitCommand extends Command {
     console.log(
       "This command will create a new ekko directory in your current working directory."
     );
+    console.log("");
     let response = await cli.prompt(
       "Do you want to deploy a new ekko infrastructure (y/n)?"
     );
@@ -21,6 +22,12 @@ class InitCommand extends Command {
     } else if (response === "n") {
       EkkoInit.existingDeployment();
     }
+
+    console.log("");
+    console.log(
+      "you can now create, deploy, update, and destroy ekko functions from within the newly created ekko_functions directory"
+    );
+    console.log("");
   }
 }
 
