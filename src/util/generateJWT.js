@@ -18,10 +18,23 @@ const generateJWT = (appName) => {
   userToken.appName = appName;
   adminToken.appName = appName;
 
+  spinner.succeed(
+    `JsonWebTokens successfully created for application '${appName}'.`
+  );
+  console.log("");
+
+  spinner.succeed(`Your ekko server endpoint:`);
+  console.log(process.env.API_ENDPOINT);
+  console.log("");
+
   userToken = jwt.sign(userToken, SECRET);
-  spinner.succeed(`User JsonWebToken successfully created: ${userToken}`);
+  spinner.succeed(`User JsonWebToken for your ekko client code:`);
+  console.log(userToken);
+  console.log("");
   adminToken = jwt.sign(adminToken, SECRET);
-  spinner.succeed(`Admin JsonWebToken successfully created ${adminToken}`);
+  spinner.succeed(`Admin JsonWebToken for your server code:`);
+  console.log(adminToken);
+  console.log("");
 };
 
 const generateAssociationsJWT = (associations) => {
