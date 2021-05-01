@@ -1,6 +1,5 @@
 const zipFile = require("./zipFile");
 const fs = require("fs");
-// const getLambdaRole = require("./getLambdaRole");
 const lambda = require("./lambda");
 const {
   deleteLocalFile,
@@ -16,7 +15,6 @@ const deploy = async (fileName) => {
   zipFile(fileName);
   const zipContents = fs.readFileSync(`${fileName}.zip`);
   spinner.start(`Deploying ${fileName}...`);
-  // const lambdaRole = await getLambdaRole();
   const params = {
     Code: {
       ZipFile: zipContents,
