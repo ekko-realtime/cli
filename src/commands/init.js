@@ -25,7 +25,7 @@ class InitCommand extends Command {
 
     console.log("");
     console.log(
-      "you can now create, deploy, update, and destroy ekko functions from within the newly created ekko_functions directory"
+      "You can now create, deploy, update, and destroy ekko functions from within the newly created ekko_functions directory"
     );
     console.log("");
   }

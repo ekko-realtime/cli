@@ -14,12 +14,12 @@ const getCdkOutputs = () => {
   const SECRET = data["ekko-server"].secret;
   const LAMBDA_ROLE_ARN = data["ekko-server"].lambdaRoleArn;
 
-  return { S3_BUCKET, API_ENDPOINT, SECRET };
+  return { S3_BUCKET, API_ENDPOINT, SECRET, LAMBDA_ROLE_ARN };
 };
 
 const writeToEnv = () => {
   // console.log("DATA:", data);
-  const { S3_BUCKET, API_ENDPOINT, SECRET } = getCdkOutputs();
+  const { S3_BUCKET, API_ENDPOINT, SECRET, LAMBDA_ROLE_ARN } = getCdkOutputs();
   const ENV_VARIABLES = `S3_BUCKET=${S3_BUCKET}\nAPI_ENDPOINT=${API_ENDPOINT}\nSECRET=${SECRET}\nLAMBDA_ROLE_ARN=${LAMBDA_ROLE_ARN}`;
   // console.log(S3_BUCKET);
   // console.log(API_ENDPOINT);

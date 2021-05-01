@@ -113,9 +113,8 @@ const createFunction = (functionName) => {
     if (err) throw err;
   });
 
-  spinner.succeed(
-    `Ekko function ${functionName} successfully created in ${process.cwd()}`
-  );
+  spinner.succeed(`Ekko function ${functionName} successfully created:`);
+  console.log(process.cwd());
 };
 
 const createBlankEkkoDirectory = () => {
@@ -161,7 +160,7 @@ const deleteLocalDirectory = (name) => {
       if (error) {
         console.log(error);
       } else {
-        console.log(`Local ekko function '${name}' successfully deleted`);
+        spinner.succeed(`Local ekko function '${name}' successfully deleted`);
       }
     }
   );
