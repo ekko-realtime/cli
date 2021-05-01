@@ -9,7 +9,7 @@ const EkkoInit = require("../util/ekkoInit.js");
 class InitCommand extends Command {
   async run() {
     console.log(
-      "This command will create a new ekko directory in your current working directory."
+      "This will create a new ekko directory in your current working directory."
     );
     console.log("");
     let response = await cli.prompt(
