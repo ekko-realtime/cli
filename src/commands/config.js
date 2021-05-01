@@ -25,6 +25,7 @@ class ConfigCommand extends Command {
 ConfigCommand.description = `Configure ekko-cli with AWS credentials.
 ...
 Configure ekko-cli with AWS credentials.
+This is another comment.
 `;
 
 module.exports = ConfigCommand;
