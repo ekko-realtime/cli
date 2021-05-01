@@ -3,6 +3,7 @@ const os = require("os");
 const { cli } = require("cli-ux");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
+const HOME_DIRECTORY = os.homedir();
 const EKKO_GLOBAL_DIRECTORY = os.homedir() + "/.ekko";
 const EKKO_ENVIRONMENT_PATH = EKKO_GLOBAL_DIRECTORY + "/.env";
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
@@ -179,4 +180,5 @@ module.exports = {
   provideAWSCredentials,
   getFiles,
   deleteLocalDirectory,
+  HOME_DIRECTORY,
 };
