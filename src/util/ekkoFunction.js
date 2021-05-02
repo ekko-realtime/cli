@@ -1,11 +1,6 @@
 const zipFile = require("./zipFile");
 const fs = require("fs");
 const lambda = require("./lambda");
-const {
-  deleteLocalFile,
-  getFiles,
-  deleteLocalDirectory,
-} = require("./fileUtil");
 const process = require("process");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
@@ -167,6 +162,39 @@ const listFunctionsStatus = async () => {
 const validDirectory = () => {
   let files = getFiles();
   return files.includes(".ekko_functions.txt");
+};
+
+const deleteLocalDirectory = (name) => {
+  fs.rmdir(
+    name,
+    {
+      recursive: true,
+    },
+    (error) => {
+      if (error) {
+        console.log(error);
+      } else {
+        spinner.succeed(`Local ekko function '${name}' successfully deleted`);
+      }
+    }
+  );
+};
+
+const deleteLocalFile = (fileName) => {
+  fs.unlink(fileName, (err) => {
+    if (err)
+      spinner.fail(`Error deleting ${fileName} from ekko_functions:`, err);
+    else {
+      if (fileName.includes(".js")) {
+        spinner.succeed`Successfully deleted ${fileName} from ekko_functions.`();
+      }
+    }
+  });
+};
+
+const getFiles = () => {
+  let files = fs.readdirSync(".");
+  return files;
 };
 
 module.exports = {

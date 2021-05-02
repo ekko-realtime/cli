@@ -1,6 +1,5 @@
 const { Command, flags } = require("@oclif/command");
 const { cli } = require("cli-ux");
-const { updateAWSCredentials } = require("../util/fileUtil.js");
 const EkkoFunction = require("../util/ekkoFunction.js");
 const loadingBar = require("../util/loadingBar.js");
 const doSomething = require("../util/doSomething.js");

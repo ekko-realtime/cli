@@ -1,7 +1,10 @@
 const fs = require("fs");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
-const { EKKO_ENVIRONMENT_PATH, EKKO_GLOBAL_DIRECTORY } = require("./fileUtil");
+const {
+  EKKO_ENVIRONMENT_PATH,
+  EKKO_GLOBAL_DIRECTORY,
+} = require("./ekkoConfig");
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 
 const getCdkOutputs = () => {

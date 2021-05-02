@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-const { EKKO_ENVIRONMENT_PATH } = require("./fileUtil");
+const { EKKO_ENVIRONMENT_PATH } = require("./ekkoConfig");
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 
 AWS.config.update({

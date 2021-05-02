@@ -1,14 +1,9 @@
 const process = require("process");
 const childProcess = require("child_process");
+const fs = require("fs");
 const { spawnSync } = require("child_process");
-const {
-  provideAWSCredentials,
-  updateAWSCredentials,
-  createBlankEkkoDirectory,
-  EKKO_GLOBAL_DIRECTORY,
-} = require("./fileUtil.js");
-const DEPLOY_DIRECTORY = `${EKKO_GLOBAL_DIRECTORY}/deploy`;
-const CDK_OUTPUTS_PATH = `${EKKO_GLOBAL_DIRECTORY}/cdk_outputs.json`;
+const EkkoConfig = require("./ekkoConfig.js");
+const { EKKO_GLOBAL_DIRECTORY } = require("./ekkoConfig");
 const cdkOutputs = require("./cdkOutputs");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
@@ -16,19 +11,41 @@ const DEPLOY_REPO = "https://github.com/ekko-live/deploy.git";
 const os = require("os");
 const repo = "https://github.com/ekko-live/ekko-init.git";
 const CWD = process.cwd();
+const DEPLOY_DIRECTORY = `${EKKO_GLOBAL_DIRECTORY}/deploy`;
+const CDK_OUTPUTS_PATH = `${EKKO_GLOBAL_DIRECTORY}/cdk_outputs.json`;
 
 const existingDeployment = async () => {
-  await updateAWSCredentials();
+  await EkkoConfig.updateAWSCredentials();
   createBlankEkkoDirectory();
 };
 
 const newDeployment = async () => {
-  await provideAWSCredentials();
+  await EkkoConfig.AWSCredentials();
   cloneDeployRepo();
   installCDK();
   deployAWSInfrastructure();
   createEkkoDirectory(CWD);
   handleCDKOutputs();
+};
+
+const createBlankEkkoDirectory = () => {
+  spinner.start();
+  if (fs.existsSync("./ekko")) {
+    spinner.fail("This directory already contains an ekko directory!");
+  } else {
+    fs.mkdirSync("./ekko", (err) => {
+      if (err) {
+        return console.error(err);
+      }
+    });
+    fs.mkdirSync("./ekko/apps", (err) => {
+      if (err) {
+        return console.error(err);
+      }
+    });
+
+    spinner.succeed("ekko directory created");
+  }
 };
 
 const cloneDeployRepo = () => {

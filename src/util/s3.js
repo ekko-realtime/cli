@@ -1,5 +1,5 @@
 var AWS = require("aws-sdk");
-const { EKKO_ENVIRONMENT_PATH } = require("./fileUtil");
+const { EKKO_ENVIRONMENT_PATH } = require("./ekkoConfig");
 const fs = require("fs");
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 const region = process.env.AWS_REGION;

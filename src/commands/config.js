@@ -1,9 +1,9 @@
 const { Command, flags } = require("@oclif/command");
-const { updateAWSCredentials } = require("../util/fileUtil.js");
+const EkkoConfig = require("../util/ekkoConfig.js");
 
 class ConfigCommand extends Command {
   async run() {
-    updateAWSCredentials();
+    EkkoConfig.updateAWSCredentials();
   }
 }
 

@@ -1,6 +1,6 @@
 const process = require("process");
 const { spawnSync } = require("child_process");
-const { EKKO_GLOBAL_DIRECTORY } = require("./fileUtil.js");
+const { EKKO_GLOBAL_DIRECTORY } = require("./ekkoConfig.js");
 const { homedir } = require("os");
 const childProcess = require("child_process");
 const ora = require("ora");

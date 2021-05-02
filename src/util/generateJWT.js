@@ -1,6 +1,6 @@
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
-const { EKKO_ENVIRONMENT_PATH } = require("./fileUtil");
+const { EKKO_ENVIRONMENT_PATH } = require("./ekkoConfig");
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 const SECRET = process.env.SECRET;
 var jwt = require("jsonwebtoken");

@@ -1,9 +1,5 @@
 const { Command } = require("@oclif/command");
 const { cli } = require("cli-ux");
-const {
-  updateAWSCredentials,
-  createBlankEkkoDirectory,
-} = require("../util/fileUtil.js");
 const EkkoInit = require("../util/ekkoInit.js");
 
 class InitCommand extends Command {

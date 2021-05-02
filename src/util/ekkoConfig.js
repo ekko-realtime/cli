@@ -1,25 +1,11 @@
-const fs = require("fs");
 const os = require("os");
-const { cli } = require("cli-ux");
-const ora = require("ora");
-const spinner = ora({ color: "yellow", spinner: "dots" });
-const HOME_DIRECTORY = os.homedir();
 const EKKO_GLOBAL_DIRECTORY = os.homedir() + "/.ekko";
 const EKKO_ENVIRONMENT_PATH = EKKO_GLOBAL_DIRECTORY + "/.env";
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
-
-const duplicatePath = (path) => {
-  if (fs.existsSync(path)) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const getFiles = () => {
-  let files = fs.readdirSync(".");
-  return files;
-};
+const fs = require("fs");
+const { cli } = require("cli-ux");
+const ora = require("ora");
+const spinner = ora({ color: "yellow", spinner: "dots" });
 
 const createEkkoGlobalDirectory = () => {
   spinner.start("Creating ekko global directory...");
@@ -35,7 +21,7 @@ const createEkkoGlobalDirectory = () => {
   }
 };
 
-const provideAWSCredentials = async () => {
+const AWSCredentials = async () => {
   createEkkoGlobalDirectory();
   const AWS_ACCESS_KEY_ID = await cli.prompt(
     "Please enter your AWS ACCESS KEY ID"
@@ -89,71 +75,9 @@ const updateAWSCredentials = async () => {
   }
 };
 
-const createFile = (path, content) => {
-  fs.writeFileSync(path, content, (err) => {
-    if (err) throw err;
-  });
-};
-
-const createBlankEkkoDirectory = () => {
-  spinner.start();
-  if (duplicatePath("./ekko")) {
-    spinner.fail("This directory already contains an ekko directory!");
-  } else {
-    fs.mkdirSync("./ekko", (err) => {
-      if (err) {
-        return console.error(err);
-      }
-    });
-    fs.mkdirSync("./ekko/apps", (err) => {
-      if (err) {
-        return console.error(err);
-      }
-    });
-
-    spinner.succeed("ekko directory created");
-  }
-};
-
-const deleteLocalFile = (fileName) => {
-  fs.unlink(fileName, (err) => {
-    if (err)
-      spinner.fail(`Error deleting ${fileName} from ekko_functions:`, err);
-    else {
-      if (fileName.includes(".js")) {
-        spinner.succeed`Successfully deleted ${fileName} from ekko_functions.`();
-      }
-    }
-  });
-};
-
-const deleteLocalDirectory = (name) => {
-  fs.rmdir(
-    name,
-    {
-      recursive: true,
-    },
-    (error) => {
-      if (error) {
-        console.log(error);
-      } else {
-        spinner.succeed(`Local ekko function '${name}' successfully deleted`);
-      }
-    }
-  );
-};
-
 module.exports = {
-  duplicatePath,
-  createFile,
-  createBlankEkkoDirectory,
-  deleteLocalFile,
+  AWSCredentials,
   updateAWSCredentials,
   EKKO_ENVIRONMENT_PATH,
-  createEkkoGlobalDirectory,
   EKKO_GLOBAL_DIRECTORY,
-  provideAWSCredentials,
-  getFiles,
-  deleteLocalDirectory,
-  HOME_DIRECTORY,
 };

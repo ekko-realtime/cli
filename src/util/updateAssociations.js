@@ -3,7 +3,7 @@ const spinner = ora({ color: "yellow", spinner: "dots" });
 const axios = require("axios").default;
 const fs = require("fs");
 const { generateAssociationsJWT } = require("./generateJWT");
-const { EKKO_ENVIRONMENT_PATH } = require("./fileUtil");
+const { EKKO_ENVIRONMENT_PATH } = require("./ekkoConfig");
 const s3 = require("./s3.js");
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 const ASSOCIATIONS = "associations.json";
