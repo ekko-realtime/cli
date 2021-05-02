@@ -1,5 +1,5 @@
 const { Command } = require("@oclif/command");
-const { createFunction } = require("../util/fileUtil");
+const EkkoFunction = require("../util/ekkoFunction");
 
 class CreateCommand extends Command {
   static args = [
@@ -8,12 +8,11 @@ class CreateCommand extends Command {
       required: true,
       description: "Name of new ekko function.",
       hidden: false,
-      // default: "myEkkoFunction",
     },
   ];
   async run() {
     const { args } = this.parse(CreateCommand);
-    createFunction(args.functionName);
+    EkkoFunction.create(args.functionName);
   }
 }
 

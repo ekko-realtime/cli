@@ -14,7 +14,6 @@ class CreateCommand extends Command {
   async run() {
     const { args } = this.parse(CreateCommand);
     generateJWT(args.appName);
-    // verifyJWT(args.appName);
   }
 }
 

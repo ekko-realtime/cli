@@ -7,7 +7,6 @@ class DeployCommand extends Command {
       required: true,
       description: "Name of Function you would like to deploy.",
       hidden: false,
-      // default: "myEkkoFunction",
     },
   ];
 

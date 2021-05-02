@@ -3,10 +3,6 @@ const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
 
 const zipFile = (filename) => {
-  // const path = `./${filename}/${filename}.js`;
-
-  // console.log(path);
-
   try {
     console.log(process.cwd());
     process.chdir(filename);

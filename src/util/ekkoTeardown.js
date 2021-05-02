@@ -15,14 +15,10 @@ const teardown = async () => {
 
   console.log("");
   let result = spawnSync("cdk", ["destroy", "-f", "*"]);
-  // if (result.status !== 0) {
-  //   process.stderr.write(result.stderr);
-  //   process.exit(result.status);
-  // } else {
-  //   process.stdout.write(result.stdout);
-  //   process.stderr.write(result.stderr);
-  // }
-
+  if (result.status !== 0) {
+    process.stderr.write(result.stderr);
+    process.exit(result.status);
+  }
   process.chdir(homedir());
   childProcess.execSync("rm -rf .ekko");
   spinner.succeed("AWS infrastructure successfully torn down");

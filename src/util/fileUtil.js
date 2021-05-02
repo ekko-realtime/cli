@@ -8,11 +8,6 @@ const EKKO_GLOBAL_DIRECTORY = os.homedir() + "/.ekko";
 const EKKO_ENVIRONMENT_PATH = EKKO_GLOBAL_DIRECTORY + "/.env";
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 
-const FUNCTION_TEMPLATE = `exports.handler = async (message) => {
-  // Implement ekko function
-  return message;
-};`;
-
 const duplicatePath = (path) => {
   if (fs.existsSync(path)) {
     return true;
@@ -100,24 +95,6 @@ const createFile = (path, content) => {
   });
 };
 
-const createFunction = (functionName) => {
-  spinner.start("Creating function...");
-  fs.mkdirSync(`./${functionName}`, (err) => {
-    if (err) {
-      spinner.fail();
-      return console.error(err);
-    }
-  });
-  process.chdir(functionName);
-
-  fs.writeFileSync("index.js", FUNCTION_TEMPLATE, (err) => {
-    if (err) throw err;
-  });
-
-  spinner.succeed(`Ekko function ${functionName} successfully created:`);
-  console.log(process.cwd());
-};
-
 const createBlankEkkoDirectory = () => {
   spinner.start();
   if (duplicatePath("./ekko")) {
@@ -139,7 +116,6 @@ const createBlankEkkoDirectory = () => {
 };
 
 const deleteLocalFile = (fileName) => {
-  // console.log("FILE", fileName);
   fs.unlink(fileName, (err) => {
     if (err)
       spinner.fail(`Error deleting ${fileName} from ekko_functions:`, err);
@@ -174,7 +150,6 @@ module.exports = {
   deleteLocalFile,
   updateAWSCredentials,
   EKKO_ENVIRONMENT_PATH,
-  createFunction,
   createEkkoGlobalDirectory,
   EKKO_GLOBAL_DIRECTORY,
   provideAWSCredentials,

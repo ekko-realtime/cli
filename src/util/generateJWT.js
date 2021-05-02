@@ -39,8 +39,6 @@ const generateJWT = (appName) => {
 
 const generateAssociationsJWT = (associations) => {
   const token = jwt.sign(associations, SECRET);
-  // const verified = jwt.verify(token, SECRET);
-  // console.log("verified", verified);
   return token;
 };
 

@@ -17,27 +17,6 @@ const os = require("os");
 const repo = "https://github.com/ekko-live/ekko-init.git";
 const CWD = process.cwd();
 
-/*
-before running ekko init
-  - install aws-cli
-  - input credentials for AWS (then they can install and run cdk deploy)
-
-
-create ~/.ekko folder
-git clone git@github.com:ekko-live/deploy.git     CLONE INTO .ekko
-cd into .ekko/deploy
-git fetch && git checkout microdeploy  // NOT NEEDED IN THE END
-
-npm install -g aws-cdk
-npm install
-cdk bootstrap
-cdk deploy '*' --outputs-file ~/.ekko/cdk-outputs.json --require-approval never
-
-take cdk outputs and write them to .env
-get AWS credentials from dev and write to .env
-create ekko directory
-*/
-
 const existingDeployment = async () => {
   await updateAWSCredentials();
   createBlankEkkoDirectory();
