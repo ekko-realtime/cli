@@ -2,9 +2,10 @@ const tap = require("tap");
 const fs = require("fs");
 const EkkoFunction = require("../src/util/ekkoFunction.js");
 
-// EkkoFunction.create("tapTestFunction");
-tap.ok(fs.existsSync("tapTestFunction"));
-// EkkoFunction.deleteLocalDirectory("tapTestFunction");
+// tap.before(() => EkkoFunction.create("tapTestFunction"));
+// tap.test
+// tap.ok(fs.existsSync("tapTestFunction"));
+// tap.teardown(() => EkkoFunction.deleteLocalDirectory("tapTestFunction"));
 
 /*
 create temp dir
