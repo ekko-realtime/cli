@@ -5,6 +5,7 @@ const repo = "https://github.com/ekko-live/ekko-init.git";
 const { cli } = require("cli-ux");
 
 const test = async () => {
+  console.log("howdy");
   // let message = loadingBar("Starting something");
   // await doSomething();
   // clearInterval(message);

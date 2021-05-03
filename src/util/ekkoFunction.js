@@ -11,25 +11,29 @@ const FUNCTION_TEMPLATE = `exports.handler = async (message) => {
 };`;
 
 const create = (functionName) => {
-  spinner.start("Creating function...");
-  fs.mkdirSync(`./${functionName}`, (err) => {
-    if (err) {
-      spinner.fail();
-      return console.error(err);
-    }
-  });
-  process.chdir(functionName);
+  if (validDirectory()) {
+    spinner.start("Creating function...");
+    fs.mkdirSync(`./${functionName}`, (err) => {
+      if (err) {
+        spinner.fail();
+        return console.error(err);
+      }
+    });
+    process.chdir(functionName);
 
-  fs.writeFileSync("index.js", FUNCTION_TEMPLATE, (err) => {
-    if (err) throw err;
-  });
+    fs.writeFileSync("index.js", FUNCTION_TEMPLATE, (err) => {
+      if (err) throw err;
+    });
 
-  spinner.succeed(`Ekko function ${functionName} successfully created:`);
-  console.log(process.cwd());
+    spinner.succeed(`Ekko function ${functionName} successfully created:`);
+    console.log(process.cwd());
+  } else {
+    spinner.fail("Command can't be run outside of ekko_functions directory.");
+  }
 };
 
 const deploy = async (fileName) => {
-  if (validDirectory) {
+  if (validDirectory()) {
     zipFile(fileName);
     const zipContents = fs.readFileSync(`${fileName}.zip`);
     spinner.start(`Deploying ${fileName}...`);
@@ -62,7 +66,7 @@ const deploy = async (fileName) => {
 };
 
 const destroy = async (functionName) => {
-  if (validDirectory) {
+  if (validDirectory()) {
     spinner.start(`Destroying ${functionName}...`);
     const params = {
       FunctionName: functionName,
@@ -82,7 +86,7 @@ const destroy = async (functionName) => {
 };
 
 const update = async (functionName) => {
-  if (validDirectory) {
+  if (validDirectory()) {
     spinner.start(`Updating ${functionName}...`);
     zipFile(functionName);
     const zipContents = fs.readFileSync(`${functionName}.zip`);
@@ -206,4 +210,5 @@ module.exports = {
   getEkkoFunctions,
   listFunctionsStatus,
   deleteLocalDirectory,
+  deleteLocalFile,
 };

@@ -2,10 +2,34 @@ const tap = require("tap");
 const fs = require("fs");
 const EkkoFunction = require("../src/util/ekkoFunction.js");
 
-// tap.before(() => EkkoFunction.create("tapTestFunction"));
-// tap.test
-// tap.ok(fs.existsSync("tapTestFunction"));
-// tap.teardown(() => EkkoFunction.deleteLocalDirectory("tapTestFunction"));
+tap.beforeEach(() => {
+  fs.writeFile(".ekko_functions.txt", "", function (err) {
+    if (err) throw err;
+    // console.log('File is created successfully.');
+  });
+  EkkoFunction.create("tapTestFunction");
+});
+tap.afterEach(() => {
+  EkkoFunction.deleteLocalDirectory("tapTestFunction");
+  fs.unlink(".ekko_functions.txt", (err) => {
+    if (err) {
+      console.error(err);
+    }
+  });
+});
+
+tap.test("function is created", (t) => {
+  t.ok(fs.existsSync("index.js"));
+  process.chdir("..");
+  t.ok(fs.existsSync("tapTestFunction"));
+  t.end();
+});
+
+// tap.test("function is deployed", (t) => {
+//   process.chdir("..");
+//   EkkoFunction.deploy("tapTestFunction");
+//   t.end();
+// });
 
 /*
 create temp dir
