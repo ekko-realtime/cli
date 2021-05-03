@@ -11,7 +11,7 @@ const S3_BUCKET = process.env.S3_BUCKET;
 
 const updateAssociations = () => {
   updateS3();
-  // updateServer();
+  updateServer();
 };
 
 const updateS3 = async () => {
