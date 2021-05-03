@@ -20,7 +20,7 @@ const deploy = async (fileName) => {
       ZipFile: zipContents,
     },
     FunctionName: fileName,
-    Handler: `${fileName}.handler`,
+    Handler: `${fileName}/index.handler`,
     Role: LAMBDA_ROLE_ARN,
     Runtime: "nodejs14.x",
     Tags: { service: "ekko" },
