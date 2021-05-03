@@ -12,3 +12,4 @@ tap.ok(process.env.S3_BUCKET);
 tap.ok(process.env.AWS_ACCESS_KEY_ID);
 tap.ok(process.env.AWS_SECRET_KEY);
 tap.ok(process.env.AWS_REGION);
+tap.ok(process.env.LAMBDA_ROLE_ARN);

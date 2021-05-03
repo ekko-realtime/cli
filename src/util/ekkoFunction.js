@@ -38,7 +38,7 @@ const deploy = async (fileName) => {
         ZipFile: zipContents,
       },
       FunctionName: fileName,
-      Handler: `${fileName}/index.handler`,
+      Handler: `/index.handler`,
       Role: LAMBDA_ROLE_ARN,
       Runtime: "nodejs14.x",
       Tags: { service: "ekko" },
@@ -205,4 +205,5 @@ module.exports = {
   getEkkoLambdas,
   getEkkoFunctions,
   listFunctionsStatus,
+  deleteLocalDirectory,
 };
