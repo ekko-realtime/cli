@@ -60,12 +60,18 @@ const updateAWSCredentials = async () => {
         "Please enter the name of the S3 bucket where your organization's associations.json is stored"
       );
 
+  const LAMBDA_ROLE_ARN = process.env.LAMBDA_ROLE_ARN
+    ? process.env.LAMBDA_ROLE_ARN
+    : await cli.prompt(
+        "Please enter Lambda Role ARN that your organization uses to deploy lambdas from ekko_functions"
+      );
+
   const AWS_ACCESS_KEY_ID = await cli.prompt(
     "Please enter your AWS ACCESS KEY ID"
   );
   const AWS_SECRET_KEY = await cli.prompt("Please enter your AWS SECRET Key");
   const AWS_REGION = await cli.prompt("Please enter your AWS REGION");
-  const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\nSECRET=${SECRET}\nAPI_ENDPOINT=${API_ENDPOINT}\nS3_BUCKET=${S3_BUCKET}\n`;
+  const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\nSECRET=${SECRET}\nAPI_ENDPOINT=${API_ENDPOINT}\nS3_BUCKET=${S3_BUCKET}\nLAMBDA_ROLE_ARN=${LAMBDA_ROLE_ARN}\n`;
 
   try {
     fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES);
