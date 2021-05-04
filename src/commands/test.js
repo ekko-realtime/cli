@@ -15,10 +15,10 @@ class TestCommand extends Command {
   async run() {
     // cli.action.start("starting a process");
     // cli.action.start("starting a process", "initializing", { stdout: true });
-    // spinner.start("Here");
-    // await doSomething();
-    // spinner.succeed("Success!");
-    console.log("howdy");
+    spinner.start("Here");
+    await doSomething();
+    spinner.succeed("Success!");
+    // console.log("howdy");
 
     //   try {
     //     // spinner.succeed("Done!");

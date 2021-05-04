@@ -19,11 +19,11 @@ class InitCommand extends Command {
       await EkkoInit.existingDeployment();
     }
 
-    console.log("");
-    console.log(
-      "You can now create, deploy, update, and destroy ekko functions from within the newly created ekko_functions directory"
-    );
-    console.log("");
+    // console.log("");
+    // console.log(
+    //   "You can now create, deploy, update, and destroy ekko functions from within the newly created ekko_functions directory"
+    // );
+    // console.log("");
   }
 }
 

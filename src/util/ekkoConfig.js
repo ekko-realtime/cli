@@ -7,8 +7,8 @@ const { cli } = require("cli-ux");
 const ora = require("ora");
 const spinner = ora({ color: "yellow", spinner: "dots" });
 
-const createEkkoGlobalDirectory = () => {
-  spinner.start("Creating ekko global directory...");
+const createEkkoGlobalDirectory = async () => {
+  spinner.start();
   if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
     try {
       fs.mkdirSync(EKKO_GLOBAL_DIRECTORY);
@@ -22,7 +22,7 @@ const createEkkoGlobalDirectory = () => {
 };
 
 const AWSCredentials = async () => {
-  createEkkoGlobalDirectory();
+  await createEkkoGlobalDirectory();
   const AWS_ACCESS_KEY_ID = await cli.prompt(
     "Please enter your AWS ACCESS KEY ID"
   );
@@ -31,10 +31,11 @@ const AWSCredentials = async () => {
   const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\n`;
 
   try {
+    spinner.start();
     fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES);
     spinner.succeed("Credentials saved to ekko environment");
   } catch (err) {
-    console.error(err);
+    spinner.fail(err);
   }
 };
 

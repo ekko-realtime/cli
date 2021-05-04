@@ -20,20 +20,27 @@ const getCdkOutputs = () => {
   return { S3_BUCKET, API_ENDPOINT, SECRET, LAMBDA_ROLE_ARN };
 };
 
-const writeToEnv = () => {
+const writeToEnv = async () => {
   const { S3_BUCKET, API_ENDPOINT, SECRET, LAMBDA_ROLE_ARN } = getCdkOutputs();
   const ENV_VARIABLES = `S3_BUCKET=${S3_BUCKET}\nAPI_ENDPOINT=${API_ENDPOINT}\nSECRET=${SECRET}\nLAMBDA_ROLE_ARN=${LAMBDA_ROLE_ARN}`;
-  fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES, { flag: "a+" });
+  await writeFilePromise(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES, { flag: "a+" });
+};
+
+const writeFilePromise = async (path, content, flags) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFileSync(path, content, flags);
+    resolve();
+  });
 };
 
 const logValues = () => {
   const { API_ENDPOINT } = getCdkOutputs();
-  console.log("");
   spinner.succeed(`Grabbing your ekko server API endpoint...`);
   console.log("");
   console.log(
     "Copy this ekko server API endpoint and use it to create ekko client instances:"
   );
+  console.log("");
   console.log(API_ENDPOINT);
   console.log("");
 };
