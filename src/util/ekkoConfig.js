@@ -1,4 +1,8 @@
 const os = require("os");
+var AWS = require("aws-sdk");
+const Promisify = require("./promisify.js");
+const { homedir } = require("os");
+const childProcess = require("child_process");
 const EKKO_GLOBAL_DIRECTORY = os.homedir() + "/.ekko";
 const EKKO_ENVIRONMENT_PATH = EKKO_GLOBAL_DIRECTORY + "/.env";
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
@@ -21,7 +25,7 @@ const createEkkoGlobalDirectory = async () => {
   }
 };
 
-const AWSCredentials = async () => {
+const setAWSCredentials = async () => {
   await createEkkoGlobalDirectory();
   const AWS_ACCESS_KEY_ID = await cli.prompt(
     "Please enter your AWS ACCESS KEY ID"
@@ -30,14 +34,22 @@ const AWSCredentials = async () => {
   const AWS_REGION = await cli.prompt("Please enter your AWS REGION");
   const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\n`;
 
-  try {
-    spinner.start();
-    fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES);
-    spinner.succeed("Credentials saved to ekko environment");
-  } catch (err) {
-    spinner.fail(err);
-  }
+  spinner.start("Updating AWS config file...");
+  await Promisify.execute(`aws configure set region ${AWS_REGION}`);
+  await Promisify.execute(
+    `aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}`
+  );
+  await Promisify.execute(
+    `aws configure set aws_secret_access_key ${AWS_SECRET_KEY}`
+  );
+  spinner.succeed("AWS config file updated with credentials");
+
+  spinner.start();
+  fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES);
+  spinner.succeed("Credentials saved to ekko environment");
 };
+
+const updateAWSConfig = async () => {};
 
 const updateAWSCredentials = async () => {
   // create .ekko if it does not already exist
@@ -83,7 +95,7 @@ const updateAWSCredentials = async () => {
 };
 
 module.exports = {
-  AWSCredentials,
+  setAWSCredentials,
   updateAWSCredentials,
   EKKO_ENVIRONMENT_PATH,
   EKKO_GLOBAL_DIRECTORY,

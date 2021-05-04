@@ -20,12 +20,12 @@ const existingDeployment = async () => {
 };
 
 const newDeployment = async () => {
-  await EkkoConfig.AWSCredentials();
-  await cloneDeployRepo();
-  await installCDK();
-  await deployAWSInfrastructure();
-  await createEkkoDirectory(CWD);
-  await handleCDKOutputs();
+  await EkkoConfig.setAWSCredentials();
+  // await cloneDeployRepo();
+  // await installCDK();
+  // await deployAWSInfrastructure();
+  // await createEkkoDirectory(CWD);
+  // await handleCDKOutputs();
 };
 
 const cloneDeployRepo = async () => {
