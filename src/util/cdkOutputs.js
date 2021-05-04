@@ -33,16 +33,17 @@ const writeFilePromise = async (path, content, flags) => {
   });
 };
 
-const logValues = () => {
-  const { API_ENDPOINT } = getCdkOutputs();
-  spinner.succeed(`Grabbing your ekko server API endpoint...`);
-  console.log("");
-  console.log(
-    "Copy this ekko server API endpoint and use it to create ekko client instances:"
-  );
-  console.log("");
-  console.log(API_ENDPOINT);
-  console.log("");
-};
+// const logValues = () => {
+//   const { API_ENDPOINT } = getCdkOutputs();
+//   spinner.succeed(`Grabbing your ekko server API endpoint...`);
+//   console.log("");
+//   console.log(
+//     "Your ekko server API endpoint:"
+//   );
+//   console.log("");
+//   console.log(API_ENDPOINT);
+//   console.log("");
+//   console.log("You don't need to save this. The jwt command will ");
+// };
 
-module.exports = { writeToEnv, logValues };
+module.exports = { writeToEnv };

@@ -53,7 +53,7 @@ const deployAWSInfrastructure = async () => {
   await Promisify.spawner("cdk", ["bootstrap"]);
   spinner.succeed("Bootstrapping complete");
   spinner.start(
-    "Deploying AWS infrastructure with cdk. This could take 15 minutes or more...\n"
+    "Deploying AWS infrastructure with CDK. This could take 15 minutes or more...\n"
   );
   await Promisify.execute(
     `cdk deploy '*' --outputs-file ${CDK_OUTPUTS_PATH} --require-approval never`
@@ -72,10 +72,15 @@ const createEkkoDirectory = async (CWD) => {
 };
 
 const handleCDKOutputs = async () => {
-  spinner.start("Parsing cdk outputs...");
+  spinner.start("Parsing CDK outputs...");
   await cdkOutputs.writeToEnv();
-  spinner.succeed("cdk outputs written to ekko environment");
-  cdkOutputs.logValues();
+  spinner.succeed("CDK outputs written to ekko environment");
+  spinner.start();
+  spinner.succeed("Ekko init complete!");
+  console.log(
+    "You can now create realtime applications with serverless functions. Run 'ekko --help' to get started."
+  );
+  // cdkOutputs.logValues();
 };
 
 const createBlankEkkoDirectory = () => {

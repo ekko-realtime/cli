@@ -27,6 +27,7 @@ const updateS3 = async () => {
   fileStream.on("error", function (err) {
     console.log("File Error", err);
   });
+
   uploadParams.Body = fileStream;
 
   s3.upload(uploadParams, function (err, data) {
@@ -43,7 +44,6 @@ const updateS3 = async () => {
 
 const updateServer = () => {
   const API_ENDPOINT = process.env.API_ENDPOINT;
-  console.log(`${API_ENDPOINT}/associations`);
   let associations = fs.readFileSync("associations.json", "utf8");
   assocations = JSON.parse(associations);
   const token = generateAssociationsJWT(associations);

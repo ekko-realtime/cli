@@ -59,24 +59,24 @@ const updateAWSCredentials = async () => {
   const SECRET = process.env.SECRET
     ? process.env.SECRET
     : await cli.prompt(
-        "Please enter the JWT secret for your organization's deployed ekko infrastructure"
+        "Please enter the SECRET for your organization's deployed ekko infrastructure"
       );
   const API_ENDPOINT = process.env.API_ENDPOINT
     ? process.env.API_ENDPOINT
     : await cli.prompt(
-        "Please enter the API Key for your organization's deployed ekko infrastructure"
+        "Please enter the API_ENDPOINT for your organization's deployed ekko infrastructure"
       );
 
   const S3_BUCKET = process.env.S3_BUCKET
     ? process.env.S3_BUCKET
     : await cli.prompt(
-        "Please enter the name of the S3 bucket where your organization's associations.json is stored"
+        "Please enter the name of the S3_BUCKET where your organization's associations.json is stored"
       );
 
   const LAMBDA_ROLE_ARN = process.env.LAMBDA_ROLE_ARN
     ? process.env.LAMBDA_ROLE_ARN
     : await cli.prompt(
-        "Please enter Lambda Role ARN that your organization uses to deploy lambdas from ekko_functions"
+        "Please enter the LAMBDA_ROLE_ARN that your organization uses to deploy lambdas from ekko_functions"
       );
 
   const AWS_ACCESS_KEY_ID = await cli.prompt(
