@@ -1,8 +1,12 @@
 {
   "name": "ekko-realtime-cli",
   "description": "A command-line tool for ekko, the realtime serverless platform.",
+<<<<<<< HEAD
   "version": "0.0.21",
   "author": "ekko",
+=======
+  "version": "0.0.20",
+>>>>>>> 25dc5ce3dc8d024394fff0ea54f9be7fe19d1b73
   "bin": {
     "ekko": "./bin/run"
   },
@@ -54,5 +58,24 @@
     "prepack": "oclif-dev manifest && oclif-dev readme",
     "test": "tap",
     "version": "oclif-dev readme && git add README.md"
-  }
+  },
+  "author": "ekko",
+  "contributors": [
+    {
+      "name": "Alex Strick van Linschoten",
+      "github": "<https://github.com/strickvl>"
+    },
+    {
+      "name": "Dorey Miller",
+      "github": "<https://github.com/doreymiller>"
+    },
+    {
+      "name": "Drew Holbrook",
+      "github": "<https://github.com/dpholbrook>"
+    },
+    {
+      "name": "Will Lotherington",
+      "github": "<https://github.com/wLotherington>"
+    }
+  ]
 }
