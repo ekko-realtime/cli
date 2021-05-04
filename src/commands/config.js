@@ -1,4 +1,4 @@
-const { Command, flags } = require("@oclif/command");
+const { Command } = require("@oclif/command");
 const EkkoConfig = require("../util/ekkoConfig.js");
 
 class ConfigCommand extends Command {

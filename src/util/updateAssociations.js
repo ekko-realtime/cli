@@ -1,5 +1,5 @@
 const ora = require("ora");
-const spinner = ora({ color: "yellow", spinner: "dots" });
+const spinner = ora();
 const axios = require("axios").default;
 const fs = require("fs");
 const { generateAssociationsJWT } = require("./generateJWT");

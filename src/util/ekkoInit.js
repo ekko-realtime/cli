@@ -9,7 +9,7 @@ const os = require("os");
 
 const spinner = ora();
 const DEPLOY_REPO = "https://github.com/ekko-live/deploy.git";
-const repo = "https://github.com/ekko-live/ekko-init.git";
+const EKKO_REPO = "https://github.com/ekko-live/ekko-init.git";
 const CWD = process.cwd();
 const DEPLOY_DIRECTORY = `${EKKO_GLOBAL_DIRECTORY}/deploy`;
 const CDK_OUTPUTS_PATH = `${EKKO_GLOBAL_DIRECTORY}/cdk_outputs.json`;
@@ -46,21 +46,6 @@ const installCDK = async () => {
   spinner.succeed("Deployment dependencies successfully installed");
 };
 
-// const deployAWSInfrastructure = async () => {
-//   spinner.start(
-//     "Deploying temporary resources to bootstrap your AWS deployments..."
-//   );
-//   await Promisify.execute("cdk bootstrap");
-//   spinner.succeed("Bootstrapping complete");
-//   spinner.start(
-//     "Deploying AWS infrastructure with cdk. This could take 15 minutes or more...\n"
-//   );
-//   await Promisify.execute(
-//     `cdk deploy '*' --outputs-file ${CDK_OUTPUTS_PATH} --require-approval never`
-//   );
-//   spinner.succeed("AWS infrastructure successfully deployed");
-// };
-
 const deployAWSInfrastructure = async () => {
   spinner.start(
     "Deploying temporary resources to bootstrap your AWS deployments..."
@@ -80,7 +65,7 @@ const createEkkoDirectory = async (CWD) => {
   await Promisify.changeDir(os.homedir());
   await Promisify.changeDir(CWD);
   spinner.start("Downloading ekko directory...");
-  await Promisify.execute(`git clone -q '${repo}' ekko`);
+  await Promisify.execute(`git clone -q '${EKKO_REPO}' ekko`);
   await Promisify.changeDir("./ekko");
   await Promisify.execute("rm -rf .git");
   spinner.succeed("New ekko directory successfully created");

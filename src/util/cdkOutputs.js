@@ -1,6 +1,6 @@
 const fs = require("fs");
 const ora = require("ora");
-const spinner = ora({ color: "yellow", spinner: "dots" });
+const spinner = ora();
 const {
   EKKO_ENVIRONMENT_PATH,
   EKKO_GLOBAL_DIRECTORY,

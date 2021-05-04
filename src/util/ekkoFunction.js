@@ -3,7 +3,7 @@ const fs = require("fs");
 const lambda = require("./lambda");
 const process = require("process");
 const ora = require("ora");
-const spinner = ora({ color: "yellow", spinner: "dots" });
+const spinner = ora();
 const LAMBDA_ROLE_ARN = process.env.LAMBDA_ROLE_ARN;
 const FUNCTION_TEMPLATE = `exports.handler = async (message) => {
   // Implement ekko function

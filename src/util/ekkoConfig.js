@@ -5,7 +5,7 @@ require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 const fs = require("fs");
 const { cli } = require("cli-ux");
 const ora = require("ora");
-const spinner = ora({ color: "yellow", spinner: "dots" });
+const spinner = ora();
 
 const createEkkoGlobalDirectory = async () => {
   spinner.start();

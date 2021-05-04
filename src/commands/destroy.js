@@ -12,7 +12,6 @@ class DestroyCommand extends Command {
   ];
   async run() {
     const { args } = this.parse(DestroyCommand);
-
     EkkoFunction.destroy(args.functionName);
   }
 }

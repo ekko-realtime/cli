@@ -1,5 +1,5 @@
 const ora = require("ora");
-const spinner = ora({ color: "yellow", spinner: "dots" });
+const spinner = ora();
 const { EKKO_ENVIRONMENT_PATH } = require("./ekkoConfig");
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
 const SECRET = process.env.SECRET;
@@ -22,11 +22,9 @@ const generateJWT = (appName) => {
     `JsonWebTokens successfully created for application '${appName}'.`
   );
   console.log("");
-
   spinner.succeed(`Your ekko server endpoint:`);
   console.log(process.env.API_ENDPOINT);
   console.log("");
-
   userToken = jwt.sign(userToken, SECRET);
   spinner.succeed(`User JsonWebToken for your ekko client code:`);
   console.log(userToken);
