@@ -26,8 +26,8 @@ This command takes a required argument: the name of the app for which you want t
 It will print the following:
 
 - the API endpoint of your ekko infrastructure
-	- your server and client code need this to connect to your ekko infrastructure
-	- this is the same value that init outputs for a new deployment and is the same value for all applications
+  - your server and client code need this to connect to your ekko infrastructure
+  - this is the same value that init outputs for a new deployment and is the same value for all applications
 - user JWT to be used in your client side code
 - admin JWT to be used in your server side code
 `;
