@@ -31,13 +31,13 @@ To join an existing ekko infrastructure, enter 'n' at the first prompt. This doe
 
 - prompts you for the credentials required to join an existing ekko infrastructure. 
 - these credentials can be found in ~/.ekko/.env on a machine where ekko has been initialized:
-	- SECRET
-	- API_ENDPOINT
-	- S3_BUCKET
-	- LAMBDA_ROLE_ARN
+  - SECRET
+  - API_ENDPOINT
+  - S3_BUCKET
+  - LAMBDA_ROLE_ARN
 
 - prompts you for your AWS credentials
-	- AWS_ACCESS_KEY_ID
+  - AWS_ACCESS_KEY_ID
   - AWS_SECRET_KEY
   - AWS_REGION
 
