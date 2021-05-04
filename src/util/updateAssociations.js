@@ -3,6 +3,7 @@ const spinner = ora();
 const axios = require("axios").default;
 const fs = require("fs");
 const { generateAssociationsJWT } = require("./generateJWT");
+const EkkoFunction = require("./ekkoFunction");
 const { EKKO_ENVIRONMENT_PATH } = require("./ekkoConfig");
 const s3 = require("./s3.js");
 require("dotenv").config({ path: EKKO_ENVIRONMENT_PATH });
@@ -10,8 +11,12 @@ const ASSOCIATIONS = "associations.json";
 const S3_BUCKET = process.env.S3_BUCKET;
 
 const updateAssociations = () => {
-  updateS3();
-  updateServer();
+  if (EkkoFunction.validDirectory()) {
+    updateS3();
+    updateServer();
+  } else {
+    spinner.fail("Command can't be run outside of ekko_functions directory.");
+  }
 };
 
 const updateS3 = async () => {

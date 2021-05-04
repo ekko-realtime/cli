@@ -29,13 +29,19 @@ You should run the command from the working directory in which you want to initi
 
 To join an existing ekko infrastructure, enter 'n' at the first prompt. This does the following:
 
-- prompts you for the credentials required to join an existing ekko infrastructure:
-	- AWS credentials
-	- ekko server API Endpoint
-	- S3 Bucket Name
-	- JWT Secret
-	- Lambda Role ARN 
+- prompts you for the credentials required to join an existing ekko infrastructure. 
+- these credentials can be found in ~/.ekko/.env on a machine where ekko has been initialized:
+	- SECRET
+	- API_ENDPOINT
+	- S3_BUCKET
+	- LAMBDA_ROLE_ARN
 
+- prompts you for your AWS credentials
+	- AWS_ACCESS_KEY_ID
+  - AWS_SECRET_KEY
+  - AWS_REGION
+
+- saves credentials to ~/.ekko/.env
 - creates an empty ekko folder in your current working directory where you can clone your organization's realtime application repositories and ekko_functions repository
 
 To deploy a new ekko infratructure enter 'y'. This does the following:

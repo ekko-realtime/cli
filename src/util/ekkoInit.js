@@ -94,7 +94,7 @@ const createBlankEkkoDirectory = () => {
         return;
       }
     });
-    fs.mkdirSync("./ekko/apps", (err) => {
+    fs.mkdirSync("./ekko/ekko_apps", (err) => {
       if (err) {
         spinner.fail(err);
         return;

@@ -26,7 +26,6 @@ const create = (functionName) => {
     });
 
     spinner.succeed(`Ekko function ${functionName} successfully created:`);
-    console.log(process.cwd());
   } else {
     spinner.fail("Command can't be run outside of ekko_functions directory.");
   }
@@ -211,4 +210,5 @@ module.exports = {
   listFunctionsStatus,
   deleteLocalDirectory,
   deleteLocalFile,
+  validDirectory,
 };
