@@ -17,8 +17,13 @@ class DestroyCommand extends Command {
   }
 }
 
-DestroyCommand.description = `Delete an ekko function and tear down the associated Lambda
-Deletes an ekko function and tears down the associated Lambda
+DestroyCommand.description = `Delete an ekko function locally and from AWS Lambda
+...
+Deletes an ekko function folder and tears down the associated AWS Lambda
+
+Pass in the name of the function and this command will:
+- remove the function from AWS Lambda
+- delete the (local) directory where that function's code was stored
 `;
 
 module.exports = DestroyCommand;

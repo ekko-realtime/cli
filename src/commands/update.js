@@ -23,8 +23,13 @@ class UpdateCommand extends Command {
   }
 }
 
-UpdateCommand.description = `Update associations.json or an AWS lambda associated with the local ekko function
-Update associations.json or an AWS lambda associated with the local ekko function
+UpdateCommand.description = `Update associations.json or a deployed AWS Lambda function
+...
+This command takes a required argument, either 'associations.json' or the name of a function that has already been deployed to AWS Lambda.
+
+If the argument passed in is 'associations.json', this command will upload an updated version of the file to S3, and will update the server to propagate the new association rules.
+
+If the argument passed in is a valid deployed AWS Lambda function, this command will update that Lambda with any changes that have been made in the directory of the ekko function.
 `;
 
 module.exports = UpdateCommand;
