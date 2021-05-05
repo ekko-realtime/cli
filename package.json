@@ -6,7 +6,7 @@
   "bin": {
     "ekko": "./bin/run"
   },
-  "bugs": "https://github.com/ekko-live/ekko-cli/issues",
+  "bugs": "https://github.com/ekko-realtime/ekko-cli/issues",
   "dependencies": {
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
@@ -34,7 +34,7 @@
     "/oclif.manifest.json",
     "/src"
   ],
-  "homepage": "https://github.com/ekko-live/cli",
+  "homepage": "https://github.com/ekko-realtime/cli",
   "keywords": [
     "oclif"
   ],
@@ -47,7 +47,7 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "ekko-live/cli",
+  "repository": "ekko-realtime/cli",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint .",

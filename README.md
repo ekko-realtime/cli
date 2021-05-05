@@ -5,19 +5,21 @@ ekko is a realtime serverless framework. Use the ekko-realtime-cli to initialize
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/ekko-cli.svg)](https://npmjs.org/package/ekko-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/ekko-cli.svg)](https://npmjs.org/package/ekko-cli)
-[![License](https://img.shields.io/npm/l/ekko-cli.svg)](https://github.com/ekko-live/ekko-cli/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/ekko-cli.svg)](https://github.com/ekko-realtime/ekko-cli/blob/master/package.json)
 
 <!-- toc -->
-* [ekko-cli](#ekko-cli)
-* [Usage](#usage)
-* [Getting Started](#getting-started)
-* [FAQ](#faq)
-* [Commands](#commands)
+
+- [ekko-cli](#ekko-cli)
+- [Usage](#usage)
+- [Getting Started](#getting-started)
+- [FAQ](#faq)
+- [Commands](#commands)
 <!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
+
 ```sh-session
 $ npm install -g ekko-realtime-cli
 $ ekko COMMAND
@@ -29,6 +31,7 @@ USAGE
   $ ekko COMMAND
 ...
 ```
+
 <!-- usagestop -->
 
 # Getting Started
@@ -125,16 +128,17 @@ To uninstall / remove the ekko cli tool, run `npm uninstall ekko-cli-tool`. Then
 # Commands
 
 <!-- commands -->
-* [`ekko config`](#ekko-config)
-* [`ekko create FUNCTIONNAME`](#ekko-create-functionname)
-* [`ekko deploy FUNCTIONNAME`](#ekko-deploy-functionname)
-* [`ekko destroy FUNCTIONNAME`](#ekko-destroy-functionname)
-* [`ekko help [COMMAND]`](#ekko-help-command)
-* [`ekko init`](#ekko-init)
-* [`ekko jwt APPNAME`](#ekko-jwt-appname)
-* [`ekko status`](#ekko-status)
-* [`ekko teardown`](#ekko-teardown)
-* [`ekko update FILENAME`](#ekko-update-filename)
+
+- [`ekko config`](#ekko-config)
+- [`ekko create FUNCTIONNAME`](#ekko-create-functionname)
+- [`ekko deploy FUNCTIONNAME`](#ekko-deploy-functionname)
+- [`ekko destroy FUNCTIONNAME`](#ekko-destroy-functionname)
+- [`ekko help [COMMAND]`](#ekko-help-command)
+- [`ekko init`](#ekko-init)
+- [`ekko jwt APPNAME`](#ekko-jwt-appname)
+- [`ekko status`](#ekko-status)
+- [`ekko teardown`](#ekko-teardown)
+- [`ekko update FILENAME`](#ekko-update-filename)
 
 ## `ekko config`
 
@@ -146,7 +150,7 @@ USAGE
 
 DESCRIPTION
   ...
-  If you change or receive new AWS credentials, or if you want to deploy the infrastructure or functions to a different 
+  If you change or receive new AWS credentials, or if you want to deploy the infrastructure or functions to a different
   AWS region, you can run this command to input the updated values.
 
   You will need:
@@ -156,7 +160,7 @@ DESCRIPTION
   - your AWS region
 ```
 
-_See code: [src/commands/config.js](https://github.com/ekko-live/cli/blob/v0.0.23/src/commands/config.js)_
+_See code: [src/commands/config.js](https://github.com/ekko-realtime/cli/blob/v0.0.23/src/commands/config.js)_
 
 ## `ekko create FUNCTIONNAME`
 
@@ -174,11 +178,11 @@ DESCRIPTION
   Pass in the name of the function you want to create as an argument to this command. It will create:
 
   - a folder in the ekko_functions directory and
-  - a skeleton JavaScript template file (inside the folder it creates) that you can use to get started writing your 
+  - a skeleton JavaScript template file (inside the folder it creates) that you can use to get started writing your
   Lambda function code.
 ```
 
-_See code: [src/commands/create.js](https://github.com/ekko-live/cli/blob/v0.0.23/src/commands/create.js)_
+_See code: [src/commands/create.js](https://github.com/ekko-realtime/cli/blob/v0.0.23/src/commands/create.js)_
 
 ## `ekko deploy FUNCTIONNAME`
 
@@ -193,15 +197,15 @@ ARGUMENTS
 
 DESCRIPTION
   ...
-  Pass in the name of a folder where your lambda function code is stored. 
-  (This should be inside an 'ekko_functions' folder; one is created for you by default when you run 'ekko init' and 
+  Pass in the name of a folder where your lambda function code is stored.
+  (This should be inside an 'ekko_functions' folder; one is created for you by default when you run 'ekko init' and
   deploy infrastructure).
 
-  This command will compress the contents of the folder and upload them to AWS Lambda. 
+  This command will compress the contents of the folder and upload them to AWS Lambda.
   To use the deployed lambda in your realtime app, add it to one or more channels in associations.json.
 ```
 
-_See code: [src/commands/deploy.js](https://github.com/ekko-live/cli/blob/v0.0.23/src/commands/deploy.js)_
+_See code: [src/commands/deploy.js](https://github.com/ekko-realtime/cli/blob/v0.0.23/src/commands/deploy.js)_
 
 ## `ekko destroy FUNCTIONNAME`
 
@@ -224,7 +228,7 @@ DESCRIPTION
   - delete the (local) directory where that function's code was stored
 ```
 
-_See code: [src/commands/destroy.js](https://github.com/ekko-live/cli/blob/v0.0.23/src/commands/destroy.js)_
+_See code: [src/commands/destroy.js](https://github.com/ekko-realtime/cli/blob/v0.0.23/src/commands/destroy.js)_
 
 ## `ekko help [COMMAND]`
 
@@ -259,7 +263,7 @@ DESCRIPTION
 
   To join an existing ekko infrastructure, enter 'n' at the first prompt. This does the following:
 
-  - prompts you for the credentials required to join an existing ekko infrastructure. 
+  - prompts you for the credentials required to join an existing ekko infrastructure.
   - these credentials can be found in ~/.ekko/.env on a machine where ekko has been initialized:
      - SECRET
      - API_ENDPOINT
@@ -272,7 +276,7 @@ DESCRIPTION
      - AWS_REGION
 
   - saves credentials to ~/.ekko/.env
-  - creates an empty ekko folder in your current working directory where you can clone your organization's realtime 
+  - creates an empty ekko folder in your current working directory where you can clone your organization's realtime
   application repositories and ekko_functions repository
 
   To deploy a new ekko infratructure enter 'y'. This does the following:
@@ -285,7 +289,7 @@ DESCRIPTION
   - writes the necessary server endpoint addresses and secrets to ~/.ekko/.env
 ```
 
-_See code: [src/commands/init.js](https://github.com/ekko-live/cli/blob/v0.0.23/src/commands/init.js)_
+_See code: [src/commands/init.js](https://github.com/ekko-realtime/cli/blob/v0.0.23/src/commands/init.js)_
 
 ## `ekko jwt APPNAME`
 
@@ -313,7 +317,7 @@ DESCRIPTION
   - admin JWT to be used in your server side code
 ```
 
-_See code: [src/commands/jwt.js](https://github.com/ekko-live/cli/blob/v0.0.23/src/commands/jwt.js)_
+_See code: [src/commands/jwt.js](https://github.com/ekko-realtime/cli/blob/v0.0.23/src/commands/jwt.js)_
 
 ## `ekko status`
 
@@ -325,17 +329,17 @@ USAGE
 
 DESCRIPTION
   ...
-  Lists the function folders that exist in your ekko_functions directory. If a function has been deployed to AWS Lambda 
-  using the ekko-cli, it is listed as (deployed). 
+  Lists the function folders that exist in your ekko_functions directory. If a function has been deployed to AWS Lambda
+  using the ekko-cli, it is listed as (deployed).
 
   Please note:
 
   - A function listed as (deployed) is not necesarily syncronized with its AWS Lambda version.
-  - It is the responsiblity of the developer to update Lambdas by running the update command when they make changes to a 
+  - It is the responsiblity of the developer to update Lambdas by running the update command when they make changes to a
   local ekko function.
 ```
 
-_See code: [src/commands/status.js](https://github.com/ekko-live/cli/blob/v0.0.23/src/commands/status.js)_
+_See code: [src/commands/status.js](https://github.com/ekko-realtime/cli/blob/v0.0.23/src/commands/status.js)_
 
 ## `ekko teardown`
 
@@ -348,13 +352,13 @@ USAGE
 DESCRIPTION
   ...
   Removes all server and shared resources infrastructure from AWS and deletes your global ~/.ekko config directory.
-  This command does not delete you ekko project directory. 
+  This command does not delete you ekko project directory.
 
   It is recommended to remove your cloud infrastructure if you are not actively developing your application.
   Remember that AWS charges you for the time your infrastructure is up and running.
 ```
 
-_See code: [src/commands/teardown.js](https://github.com/ekko-live/cli/blob/v0.0.23/src/commands/teardown.js)_
+_See code: [src/commands/teardown.js](https://github.com/ekko-realtime/cli/blob/v0.0.23/src/commands/teardown.js)_
 
 ## `ekko update FILENAME`
 
@@ -369,15 +373,16 @@ ARGUMENTS
 
 DESCRIPTION
   ...
-  This command takes a required argument, either 'associations.json' or the name of a function that has already been 
+  This command takes a required argument, either 'associations.json' or the name of a function that has already been
   deployed to AWS Lambda.
 
-  If the argument passed in is 'associations.json', this command will upload an updated version of the file to S3, and 
+  If the argument passed in is 'associations.json', this command will upload an updated version of the file to S3, and
   will update the server to propagate the new association rules.
 
-  If the argument passed in is a valid deployed AWS Lambda function, this command will update that Lambda with any 
+  If the argument passed in is a valid deployed AWS Lambda function, this command will update that Lambda with any
   changes that have been made in the directory of the ekko function.
 ```
 
-_See code: [src/commands/update.js](https://github.com/ekko-live/cli/blob/v0.0.23/src/commands/update.js)_
+_See code: [src/commands/update.js](https://github.com/ekko-realtime/cli/blob/v0.0.23/src/commands/update.js)_
+
 <!-- commandsstop -->
