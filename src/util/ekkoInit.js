@@ -8,8 +8,8 @@ const ora = require("ora");
 const os = require("os");
 
 const spinner = ora();
-const DEPLOY_REPO = "https://github.com/ekko-live/deploy.git";
-const EKKO_REPO = "https://github.com/ekko-live/ekko-init.git";
+const DEPLOY_REPO = "https://github.com/ekko-realtime/deploy.git";
+const EKKO_REPO = "https://github.com/ekko-realtime/ekko-init.git";
 const CWD = process.cwd();
 const DEPLOY_DIRECTORY = `${EKKO_GLOBAL_DIRECTORY}/deploy`;
 const CDK_OUTPUTS_PATH = `${EKKO_GLOBAL_DIRECTORY}/cdk_outputs.json`;
