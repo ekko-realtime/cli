@@ -1,6 +1,6 @@
-# ekko-cli
+# Ekko-cli
 
-ekko is a realtime serverless framework. Use the ekko-realtime-cli to initialize the ekko framework and manage serverless functions for your realtime application.
+Ekko is a realtime serverless framework. Use the ekko-realtime-cli to initialize the Ekko framework and manage serverless functions for your realtime application.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/ekko-cli.svg)](https://npmjs.org/package/ekko-cli)
@@ -56,14 +56,14 @@ The `ekko` command is run by inputting commands after the initial `ekko` like: `
 
 To read the help text for each command, type `ekko <command> --help`. This will output a short explanation of what the command does, which arguments it takes and how to use it.
 
-- `cd` to the folder in which you would like to initialise your ekko directory
+- `cd` to the folder in which you would like to initialise your Ekko directory
 - type `ekko init`:
-- type `y` to deploy a new ekko infrastructure which will:
-  - setup your AWS credentials for ekko
-  - deploy ekko infrastructure to AWS
-  - create an ekko skeleton folder and file framework for your project files in the current directory
-- type `n` to join and existing ekko infrastructure
-  - you will be prompted for your organizations ekko infrastructure information which can be found in ~/.ekko/.env on a machine where ekko has been initialized:
+- type `y` to deploy a new Ekko infrastructure which will:
+  - setup your AWS credentials for Ekko
+  - deploy Ekko infrastructure to AWS
+  - create an Ekko skeleton folder and file framework for your project files in the current directory
+- type `n` to join and existing Ekko infrastructure
+  - you will be prompted for your organizations Ekko infrastructure information which can be found in ~/.ekko/.env on a machine where Ekko has been initialized:
     - SECRET
     - API_ENDPOINT
     - S3_BUCKET
@@ -72,19 +72,19 @@ To read the help text for each command, type `ekko <command> --help`. This will 
     - AWS_ACCESS_KEY_ID
     - AWS_SECRET_KEY
     - AWS_REGION
-  - this creates a an ekko folder in your current directory containing an empty ekko_apps folder
-  - clone your organization's ekko application repositories in the ekko_apps folder
-  - clone your organizations's ekko_functions repository in the ekko folder
-- once your ekko folder is set up, `cd` into `ekko/ekko_functions` and type `ekko create <function name>` to create a folder and a template file for an AWS Lambda function.
+  - this creates a an Ekko folder in your current directory containing an empty ekko_apps folder
+  - clone your organization's Ekko application repositories in the ekko_apps folder
+  - clone your organizations's ekko_functions repository in the Ekko folder
+- once your Ekko folder is set up, `cd` into `ekko/ekko_functions` and type `ekko create <function name>` to create a folder and a template file for an AWS Lambda function.
 - type `ekko deploy <function name>` to deploy any particular function that exists locally inside the `ekko_functions` folder.
 - edit associations.json in the ekko_functions folder to associate a deployed ekko function with specific channels in your app
-- type `ekko update associations.json` to update the ekko server with your new associations
+- type `ekko update associations.json` to update the Ekko server with your new associations
 
 ### Removing Ekko
 
-To remove ekko infrastructure from AWS, run `ekko teardown`. (This removes all server and shared resources infrastructure from AWS.)
+To remove Ekko infrastructure from AWS, run `ekko teardown`. (This removes all server and shared resources infrastructure from AWS.)
 
-To uninstall / remove the ekko cli tool, run `npm uninstall ekko-cli-tool`. Then `cd` into `/usr/local/bin` and run `rm ekko` to delete the ekko binary from your hard drive.
+To uninstall / remove the Ekko cli tool, run `npm uninstall ekko-cli-tool`. Then `cd` into `/usr/local/bin` and run `rm ekko` to delete the Ekko binary from your hard drive.
 
 <!-- gettingstartedstop -->
 
@@ -94,35 +94,35 @@ To uninstall / remove the ekko cli tool, run `npm uninstall ekko-cli-tool`. Then
 
 ### I quit the `ekko init` command while it was in the middle of deploying infrastructure. Is there a way to tear down my infrastructure?
 
-- To remove this infrastructure (that AWS will continue to set up even if you interrupt the ekko cli command, visit the [AWS console](https://aws.amazon.com/console?tag=soumet-20), navigate to the CloudFormation section and you can individually delete the `ekko-server` stack and then the `shared-resources` stack. Note that the infrastructure deployment must be completed _before_ AWS will allow you to delete those stacks. AWS will also not allow you to delete `shared-resources` before `ekko-server` is deleted because there are dependencies.
+- To remove this infrastructure (that AWS will continue to set up even if you interrupt the Ekko cli command, visit the [AWS console](https://aws.amazon.com/console?tag=soumet-20), navigate to the CloudFormation section and you can individually delete the `ekko-server` stack and then the `shared-resources` stack. Note that the infrastructure deployment must be completed _before_ AWS will allow you to delete those stacks. AWS will also not allow you to delete `shared-resources` before `ekko-server` is deleted because there are dependencies.
 
-### What infrastructure does ekko spin up on my behalf?
+### What infrastructure does Ekko spin up on my behalf?
 
 - The main infrastructure we spin are as follows:
   - an S3 bucket to hold configuration files
   - an Elasticache / Redis cluster
   - an ECS cluster managed by the Fargate service for running the server containers
 
-### Does ekko apply tags to the infrastructure that gets spun up by the CLI?
+### Does Ekko apply tags to the infrastructure that gets spun up by the CLI?
 
 - Everything deployed by `ekko` is tagged with the `service:ekko` key:value pair. This will allow you to monitor and access [CloudWatch](https://aws.amazon.com/cloudwatch?tag=soumet-20) graphs and information.
 
-### Do I have to use the ekko skeleton folder?
+### Do I have to use the Ekko skeleton folder?
 
-- It is recommended that you use the ekko skeleton folder to organize your ekko applications and ekko_functions.
-- If you must, you can organize your ekko applicaiton repositories however you'd like
+- It is recommended that you use the Ekko skeleton folder to organize your Ekko applications and ekko_functions.
+- If you must, you can organize your Ekko applicaiton repositories however you'd like
 
 ### Do I have to use the ekko_functions folder?
 
-- Yes. You can only run ekko function commands from within this folder and all of your apps should share these functions.
+- Yes. You can only run Ekko function commands from within this folder and all of your apps should share these functions.
 
 ### Can I have more than one ekko_functions repository?
 
-- No. Ekko supports multiple apps but they should all use the same ekko functions.
+- No. Ekko supports multiple apps but they should all use the same Ekko functions.
 
 ### Why am I getting this error?: `Command can't be run outside of ekko_functions directory.`
 
-- Some ekko commands require that your cwd is ekko_functions. This is verified by checking for an .ekko_functions.txt file in the cwd. If you are getting this error within your ekko_functions directory, make sure that .ekko_functions.txt exists and if it does not, create it.
+- Some Ekko commands require that your cwd is ekko_functions. This is verified by checking for an .ekko_functions.txt file in the cwd. If you are getting this error within your ekko_functions directory, make sure that .ekko_functions.txt exists and if it does not, create it.
 <!-- faqstop -->
 
 # Commands
@@ -164,7 +164,7 @@ _See code: [src/commands/config.js](https://github.com/ekko-realtime/cli/blob/v0
 
 ## `ekko create FUNCTIONNAME`
 
-Create a local ekko function
+Create a local Ekko function
 
 ```
 USAGE
@@ -186,7 +186,7 @@ _See code: [src/commands/create.js](https://github.com/ekko-realtime/cli/blob/v0
 
 ## `ekko deploy FUNCTIONNAME`
 
-Deploy an ekko function to AWS Lambda
+Deploy an Ekko function to AWS Lambda
 
 ```
 USAGE
@@ -209,7 +209,7 @@ _See code: [src/commands/deploy.js](https://github.com/ekko-realtime/cli/blob/v0
 
 ## `ekko destroy FUNCTIONNAME`
 
-Delete an ekko function locally and from AWS Lambda
+Delete an Ekko function locally and from AWS Lambda
 
 ```
 USAGE
@@ -232,7 +232,7 @@ _See code: [src/commands/destroy.js](https://github.com/ekko-realtime/cli/blob/v
 
 ## `ekko help [COMMAND]`
 
-display help for ekko
+display help for Ekko
 
 ```
 USAGE
@@ -249,7 +249,7 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2
 
 ## `ekko init`
 
-Initialize files and deploy ekko infrastructure.
+Initialize files and deploy Ekko infrastructure.
 
 ```
 USAGE
