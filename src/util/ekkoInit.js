@@ -17,6 +17,9 @@ const CDK_OUTPUTS_PATH = `${EKKO_GLOBAL_DIRECTORY}/cdk_outputs.json`;
 const existingDeployment = async () => {
   await EkkoConfig.updateAWSCredentials();
   createBlankEkkoDirectory();
+  console.log(
+    "You can now work on your organization's Ekko realtime apps. Run ekko init --help for more information."
+  );
 };
 
 const newDeployment = async () => {
@@ -26,6 +29,9 @@ const newDeployment = async () => {
   await deployAWSInfrastructure();
   await createEkkoDirectory(CWD);
   await handleCDKOutputs();
+  console.log(
+    "You can now create realtime applications with serverless functions. Run 'ekko --help' to get started."
+  );
 };
 
 const cloneDeployRepo = async () => {
@@ -77,10 +83,6 @@ const handleCDKOutputs = async () => {
   spinner.succeed("CDK outputs written to ekko environment");
   spinner.start();
   spinner.succeed("Ekko init complete!\n");
-  console.log(
-    "You can now create realtime applications with serverless functions. Run 'ekko --help' to get started."
-  );
-  // cdkOutputs.logValues();
 };
 
 const createBlankEkkoDirectory = () => {
@@ -101,7 +103,7 @@ const createBlankEkkoDirectory = () => {
       }
     });
 
-    spinner.succeed("ekko directory created");
+    spinner.succeed("ekko directory created.");
   }
 };
 

@@ -88,7 +88,7 @@ const updateAWSCredentials = async () => {
 
   try {
     fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES);
-    spinner.succeed("Credentials saved to ekko environment");
+    spinner.succeed("Credentials saved to ekko environment\n");
   } catch (err) {
     console.error(err);
   }
