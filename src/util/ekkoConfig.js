@@ -16,7 +16,7 @@ const createEkkoGlobalDirectory = async () => {
   if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
     try {
       fs.mkdirSync(EKKO_GLOBAL_DIRECTORY);
-      spinner.succeed("Ekko global directory created");
+      spinner.succeed("Ekko global directory created\n");
     } catch (err) {
       throw err;
     }
@@ -46,7 +46,7 @@ const setAWSCredentials = async () => {
 
   spinner.start();
   fs.writeFileSync(EKKO_ENVIRONMENT_PATH, ENV_VARIABLES);
-  spinner.succeed("Credentials saved to ekko environment");
+  spinner.succeed("Credentials saved to ekko environment\n");
 };
 
 const updateAWSConfig = async () => {};

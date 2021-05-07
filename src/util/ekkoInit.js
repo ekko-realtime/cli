@@ -51,7 +51,7 @@ const deployAWSInfrastructure = async () => {
     "Deploying temporary resources to bootstrap your AWS deployments..."
   );
   await Promisify.spawner("cdk", ["bootstrap"]);
-  spinner.succeed("Bootstrapping complete");
+  spinner.succeed("Bootstrapping complete\n");
   spinner.start(
     "Deploying AWS infrastructure with CDK. This could take 15 minutes or more...\n"
   );
@@ -76,7 +76,7 @@ const handleCDKOutputs = async () => {
   await cdkOutputs.writeToEnv();
   spinner.succeed("CDK outputs written to ekko environment");
   spinner.start();
-  spinner.succeed("Ekko init complete!");
+  spinner.succeed("Ekko init complete!\n");
   console.log(
     "You can now create realtime applications with serverless functions. Run 'ekko --help' to get started."
   );

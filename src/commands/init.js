@@ -4,19 +4,24 @@ const EkkoInit = require("../util/ekkoInit.js");
 
 class InitCommand extends Command {
   async run() {
-    console.log(
-      "This will create a new ekko directory in your current working directory."
+    let goodDirectory = await cli.prompt(
+      "Is this the directory where you would like for your ekko folder to be initialized? (y/n)"
     );
-    console.log("");
-    let response = await cli.prompt(
-      "Do you want to deploy a new ekko infrastructure (y/n)?"
-    );
-    response = response.toLowerCase();
-
-    if (response === "y") {
-      await EkkoInit.newDeployment();
-    } else if (response === "n") {
-      await EkkoInit.existingDeployment();
+    goodDirectory = goodDirectory.toLowerCase();
+    if (goodDirectory === "y") {
+      let newDeploy = await cli.prompt(
+        "Do you want to deploy a new ekko infrastructure (y/n)?\n"
+      );
+      newDeploy = newDeploy.toLowerCase();
+      if (newDeploy === "y") {
+        await EkkoInit.newDeployment();
+      } else if (newDeploy === "n") {
+        await EkkoInit.existingDeployment();
+      }
+    } else if (goodDirectory === "n") {
+      console.log(
+        "Please change to the directory where you would like for your ekko folder to be created, then run ekko init again."
+      );
     }
   }
 }

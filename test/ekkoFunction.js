@@ -2,28 +2,43 @@ const tap = require("tap");
 const fs = require("fs");
 const EkkoFunction = require("../src/util/ekkoFunction.js");
 
-tap.beforeEach(() => {
-  fs.writeFile(".ekko_functions.txt", "", function (err) {
-    if (err) throw err;
-    // console.log('File is created successfully.');
-  });
-  EkkoFunction.create("tapTestFunction");
-});
-tap.afterEach(() => {
-  EkkoFunction.deleteLocalDirectory("tapTestFunction");
-  fs.unlink(".ekko_functions.txt", (err) => {
-    if (err) {
-      console.error(err);
-    }
-  });
-});
+// tap.beforeEach(() => {
+//   // make current directory a valid ekko_functions directory
 
-tap.test("function is created", (t) => {
-  t.ok(fs.existsSync("index.js"));
-  process.chdir("..");
-  t.ok(fs.existsSync("tapTestFunction"));
-  t.end();
-});
+// });
+// tap.afterEach(() => {
+
+// });
+
+// tap.test("function is created", (t) => {
+//   fs.writeFile(".ekko_functions.txt", "", function (err) {
+//     if (err) throw err;
+//     // console.log('File is created successfully.');
+//   });
+//   EkkoFunction.create("tapTestFunction");
+//   t.ok(fs.existsSync("index.js"), "index.js exists");
+//   process.chdir("..");
+//   t.ok(fs.existsSync("tapTestFunction"), "function directory exists");
+
+//   EkkoFunction.deleteLocalDirectory("tapTestFunction");
+//   fs.unlink(".ekko_functions.txt", (err) => {
+//     if (err) {
+//       console.error(err);
+//     }
+//   });
+//   t.end();
+// });
+
+// tap.test(
+//   "function commands can not run outside of ekko_functions directory",
+//   (t) => {
+//     t.throws(
+//       EkkoFunction.create("tapTestFunction"),
+//       "error is thrown when .ekko_functions.txt does not exist"
+//     );
+//     t.end();
+//   }
+// );
 
 // tap.test("function is deployed", (t) => {
 //   process.chdir("..");
