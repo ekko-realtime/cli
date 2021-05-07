@@ -130,7 +130,6 @@ const getLambdas = async () => {
 const getEkkoLambdas = async () => {
   spinner.start("Getting Lambda information from AWS...");
   const lambdas = await getLambdas();
-  console.log(lambdas);
   spinner.succeed("Lambda information retrieved from AWS\n");
   const ekkoLambdas = lambdas.Functions.filter((lambda) =>
     lambda.Role.includes("ekko-server")
@@ -158,17 +157,23 @@ const listFunctionsStatus = async () => {
 
     functions = functions.map((func) => {
       if (lambdas.includes(func)) {
-        return func + " (deployed)";
+        return { name: func, deployed: true };
       } else {
-        return func;
+        return { name: func, deployed: false };
       }
     });
 
     functions.sort();
 
     spinner.stop();
-    console.log(color("Ekko Functions Status:"));
-    functions.forEach((func) => console.log(func));
+    console.log("Ekko Functions Status:");
+    functions.forEach((func) => {
+      if (func.deployed === true) {
+        console.log(func.name + color(" Deployed"));
+      } else if (func.deployed === false) {
+        console.log(func.name + chalk.red.bold(" Not Deployed"));
+      }
+    });
   } else {
     spinner.fail("Command can't be run outside of ekko_functions directory.");
   }
