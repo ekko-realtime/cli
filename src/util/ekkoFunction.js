@@ -3,12 +3,14 @@ const fs = require("fs");
 const lambda = require("./lambda");
 const process = require("process");
 const ora = require("ora");
+const chalk = require("chalk");
 const spinner = ora();
 const LAMBDA_ROLE_ARN = process.env.LAMBDA_ROLE_ARN;
 const FUNCTION_TEMPLATE = `exports.handler = async (message) => {
   // Implement ekko function
   return message;
 };`;
+const color = chalk.green.bold;
 
 const create = (functionName) => {
   if (validDirectory()) {
@@ -25,7 +27,9 @@ const create = (functionName) => {
       if (err) throw err;
     });
 
-    spinner.succeed(`Ekko function ${functionName} successfully created:`);
+    spinner.succeed(
+      `Ekko function ${color(functionName)} successfully created:`
+    );
   } else {
     spinner.fail("Command can't be run outside of ekko_functions directory.");
   }
@@ -35,7 +39,7 @@ const deploy = async (fileName) => {
   if (validDirectory()) {
     zipFile(fileName);
     const zipContents = fs.readFileSync(`${fileName}.zip`);
-    spinner.start(`Deploying ${fileName}...`);
+    spinner.start(`Deploying ${color(fileName)}...`);
     const params = {
       Code: {
         ZipFile: zipContents,
@@ -50,11 +54,11 @@ const deploy = async (fileName) => {
     try {
       await lambda.createFunction(params).promise();
       spinner.succeed(
-        `Ekko function '${fileName}' successfully deployed to AWS Lambda`
+        `Ekko function ${color(fileName)} successfully deployed to AWS Lambda`
       );
     } catch (error) {
       spinner.fail(
-        `There was a problem deploying ${fileName}: ${error.message}`
+        `There was a problem deploying ${color(fileName)}: ${error.message}`
       );
     }
 
@@ -66,16 +70,18 @@ const deploy = async (fileName) => {
 
 const destroy = async (functionName) => {
   if (validDirectory()) {
-    spinner.start(`Destroying ${functionName}...`);
+    spinner.start(`Destroying ${color(functionName)}...`);
     const params = {
       FunctionName: functionName,
     };
 
     try {
       await lambda.deleteFunction(params).promise();
-      spinner.succeed(`Lambda '${functionName}' successfully destroyed!`);
+      spinner.succeed(`Lambda ${color(functionName)} successfully destroyed!`);
     } catch (error) {
-      spinner.fail(`Error tearing down Lambda ${functionName}: ${error}`);
+      spinner.fail(
+        `Error tearing down Lambda ${color(functionName)}: ${error}`
+      );
     }
 
     deleteLocalDirectory(functionName);
@@ -86,7 +92,7 @@ const destroy = async (functionName) => {
 
 const update = async (functionName) => {
   if (validDirectory()) {
-    spinner.start(`Updating ${functionName}...`);
+    spinner.start(`Updating Lambda ${color(functionName)}...`);
     zipFile(functionName);
     const zipContents = fs.readFileSync(`${functionName}.zip`);
 
@@ -97,9 +103,11 @@ const update = async (functionName) => {
 
     try {
       const response = await lambda.updateFunctionCode(params).promise();
-      spinner.succeed(`'${functionName}' Lamda successfully updated!`);
+      spinner.succeed(`${color(functionName)} Lamda successfully updated!`);
     } catch (error) {
-      spinner.fail(`Error updating Lambda ${functionName}: ${error.message}`);
+      spinner.fail(
+        `Error updating Lambda ${color(functionName)}: ${error.message}`
+      );
     }
 
     deleteLocalFile(functionName + ".zip");
@@ -122,7 +130,8 @@ const getLambdas = async () => {
 const getEkkoLambdas = async () => {
   spinner.start("Getting Lambda information from AWS...");
   const lambdas = await getLambdas();
-  spinner.succeed("Lambda information retrieved from AWS");
+  console.log(lambdas);
+  spinner.succeed("Lambda information retrieved from AWS\n");
   const ekkoLambdas = lambdas.Functions.filter((lambda) =>
     lambda.Role.includes("ekko-server")
   );
@@ -158,7 +167,7 @@ const listFunctionsStatus = async () => {
     functions.sort();
 
     spinner.stop();
-    console.log("Ekko Functions Status:");
+    console.log(color("Ekko Functions Status:"));
     functions.forEach((func) => console.log(func));
   } else {
     spinner.fail("Command can't be run outside of ekko_functions directory.");
@@ -180,7 +189,9 @@ const deleteLocalDirectory = (name) => {
       if (error) {
         console.log(error);
       } else {
-        spinner.succeed(`Local ekko function '${name}' successfully deleted`);
+        spinner.succeed(
+          `Local ekko function ${color(name)} successfully deleted`
+        );
       }
     }
   );
