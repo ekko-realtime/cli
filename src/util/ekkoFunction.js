@@ -120,7 +120,9 @@ const getLambdas = async () => {
 };
 
 const getEkkoLambdas = async () => {
+  spinner.start("Getting Lambda information from AWS...");
   const lambdas = await getLambdas();
+  spinner.succeed("Lambda information retrieved from AWS");
   const ekkoLambdas = lambdas.Functions.filter((lambda) =>
     lambda.Role.includes("ekko-server")
   );
@@ -139,8 +141,9 @@ const getEkkoFunctions = () => {
 };
 
 const listFunctionsStatus = async () => {
+  spinner.start();
   if (validDirectory()) {
-    spinner.start("Getting the status of your ekko functions...");
+    spinner.stop();
     const lambdas = await getEkkoLambdas();
     let functions = getEkkoFunctions();
 
@@ -155,7 +158,7 @@ const listFunctionsStatus = async () => {
     functions.sort();
 
     spinner.stop();
-    console.log("Ekko Functions:");
+    console.log("Ekko Functions Status:");
     functions.forEach((func) => console.log(func));
   } else {
     spinner.fail("Command can't be run outside of ekko_functions directory.");
