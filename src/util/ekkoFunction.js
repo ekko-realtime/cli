@@ -103,7 +103,7 @@ const update = async (functionName) => {
 
     try {
       const response = await lambda.updateFunctionCode(params).promise();
-      spinner.succeed(`${color(functionName)} Lamda successfully updated!`);
+      spinner.succeed(`${color(functionName)} Lambda successfully updated!`);
     } catch (error) {
       spinner.fail(
         `Error updating Lambda ${color(functionName)}: ${error.message}`
