@@ -28,9 +28,12 @@ const createEkkoGlobalDirectory = async () => {
 const setAWSCredentials = async () => {
   await createEkkoGlobalDirectory();
   const AWS_ACCESS_KEY_ID = await cli.prompt(
-    "Please enter your AWS ACCESS KEY ID"
+    "Please enter your AWS ACCESS KEY ID",
+    { type: "hide" }
   );
-  const AWS_SECRET_KEY = await cli.prompt("Please enter your AWS SECRET Key");
+  const AWS_SECRET_KEY = await cli.prompt("Please enter your AWS SECRET Key", {
+    type: "hide",
+  });
   const AWS_REGION = await cli.prompt("Please enter your AWS REGION");
   const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\n`;
 
@@ -59,7 +62,8 @@ const updateAWSCredentials = async () => {
   const SECRET = process.env.SECRET
     ? process.env.SECRET
     : await cli.prompt(
-        "Please enter the SECRET for your organization's deployed ekko infrastructure"
+        "Please enter the SECRET for your organization's deployed ekko infrastructure",
+        { type: "hide" }
       );
   const API_ENDPOINT = process.env.API_ENDPOINT
     ? process.env.API_ENDPOINT
@@ -80,9 +84,12 @@ const updateAWSCredentials = async () => {
       );
 
   const AWS_ACCESS_KEY_ID = await cli.prompt(
-    "Please enter your AWS ACCESS KEY ID"
+    "Please enter your AWS ACCESS KEY ID",
+    { type: "hide" }
   );
-  const AWS_SECRET_KEY = await cli.prompt("Please enter your AWS SECRET Key");
+  const AWS_SECRET_KEY = await cli.prompt("Please enter your AWS SECRET Key", {
+    type: "hide",
+  });
   const AWS_REGION = await cli.prompt("Please enter your AWS REGION");
   const ENV_VARIABLES = `AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}\nAWS_SECRET_KEY=${AWS_SECRET_KEY}\nAWS_REGION=${AWS_REGION}\nSECRET=${SECRET}\nAPI_ENDPOINT=${API_ENDPOINT}\nS3_BUCKET=${S3_BUCKET}\nLAMBDA_ROLE_ARN=${LAMBDA_ROLE_ARN}\n`;
 

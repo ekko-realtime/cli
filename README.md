@@ -23,7 +23,7 @@ $ npm install -g ekko-realtime-cli
 $ ekko COMMAND
 running command...
 $ ekko (-v|--version|version)
-ekko-realtime-cli/0.0.26 darwin-x64 node-v14.15.0
+ekko-realtime-cli/0.0.27 darwin-x64 node-v14.15.0
 $ ekko --help [COMMAND]
 USAGE
   $ ekko COMMAND
@@ -156,7 +156,7 @@ DESCRIPTION
   - your AWS region
 ```
 
-_See code: [src/commands/config.js](https://github.com/ekko-realtime/cli/blob/v0.0.26/src/commands/config.js)_
+_See code: [src/commands/config.js](https://github.com/ekko-realtime/cli/blob/v0.0.27/src/commands/config.js)_
 
 ## `ekko create FUNCTIONNAME`
 
@@ -178,7 +178,7 @@ DESCRIPTION
   Lambda function code.
 ```
 
-_See code: [src/commands/create.js](https://github.com/ekko-realtime/cli/blob/v0.0.26/src/commands/create.js)_
+_See code: [src/commands/create.js](https://github.com/ekko-realtime/cli/blob/v0.0.27/src/commands/create.js)_
 
 ## `ekko deploy FUNCTIONNAME`
 
@@ -201,7 +201,7 @@ DESCRIPTION
   To use the deployed lambda in your realtime app, add it to one or more channels in associations.json.
 ```
 
-_See code: [src/commands/deploy.js](https://github.com/ekko-realtime/cli/blob/v0.0.26/src/commands/deploy.js)_
+_See code: [src/commands/deploy.js](https://github.com/ekko-realtime/cli/blob/v0.0.27/src/commands/deploy.js)_
 
 ## `ekko destroy FUNCTIONNAME`
 
@@ -224,7 +224,7 @@ DESCRIPTION
   - delete the (local) directory where that function's code was stored
 ```
 
-_See code: [src/commands/destroy.js](https://github.com/ekko-realtime/cli/blob/v0.0.26/src/commands/destroy.js)_
+_See code: [src/commands/destroy.js](https://github.com/ekko-realtime/cli/blob/v0.0.27/src/commands/destroy.js)_
 
 ## `ekko help [COMMAND]`
 
@@ -285,7 +285,7 @@ DESCRIPTION
   - writes the necessary server endpoint addresses and secrets to ~/.ekko/.env
 ```
 
-_See code: [src/commands/init.js](https://github.com/ekko-realtime/cli/blob/v0.0.26/src/commands/init.js)_
+_See code: [src/commands/init.js](https://github.com/ekko-realtime/cli/blob/v0.0.27/src/commands/init.js)_
 
 ## `ekko jwt APPNAME`
 
@@ -313,7 +313,7 @@ DESCRIPTION
   - admin JWT to be used in your server side code
 ```
 
-_See code: [src/commands/jwt.js](https://github.com/ekko-realtime/cli/blob/v0.0.26/src/commands/jwt.js)_
+_See code: [src/commands/jwt.js](https://github.com/ekko-realtime/cli/blob/v0.0.27/src/commands/jwt.js)_
 
 ## `ekko status`
 
@@ -335,7 +335,7 @@ DESCRIPTION
   local ekko function.
 ```
 
-_See code: [src/commands/status.js](https://github.com/ekko-realtime/cli/blob/v0.0.26/src/commands/status.js)_
+_See code: [src/commands/status.js](https://github.com/ekko-realtime/cli/blob/v0.0.27/src/commands/status.js)_
 
 ## `ekko teardown`
 
@@ -354,7 +354,7 @@ DESCRIPTION
   Remember that AWS charges you for the time your infrastructure is up and running.
 ```
 
-_See code: [src/commands/teardown.js](https://github.com/ekko-realtime/cli/blob/v0.0.26/src/commands/teardown.js)_
+_See code: [src/commands/teardown.js](https://github.com/ekko-realtime/cli/blob/v0.0.27/src/commands/teardown.js)_
 
 ## `ekko update FILENAME`
 
@@ -379,5 +379,5 @@ DESCRIPTION
   changes that have been made in the directory of the ekko function.
 ```
 
-_See code: [src/commands/update.js](https://github.com/ekko-realtime/cli/blob/v0.0.26/src/commands/update.js)_
+_See code: [src/commands/update.js](https://github.com/ekko-realtime/cli/blob/v0.0.27/src/commands/update.js)_
 <!-- commandsstop -->
