@@ -32,6 +32,7 @@ const create = (functionName) => {
     );
   } else {
     spinner.fail("Command can't be run outside of ekko_functions directory.");
+    throw Error("Command can't be run outside of ekko_functions directory.");
   }
 };
 
@@ -204,12 +205,9 @@ const deleteLocalDirectory = (name) => {
 
 const deleteLocalFile = (fileName) => {
   fs.unlink(fileName, (err) => {
-    if (err)
+    if (err) {
       spinner.fail(`Error deleting ${fileName} from ekko_functions:`, err);
-    else {
-      if (fileName.includes(".js")) {
-        spinner.succeed`Successfully deleted ${fileName} from ekko_functions.`();
-      }
+      throw err;
     }
   });
 };

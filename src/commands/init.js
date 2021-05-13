@@ -26,7 +26,7 @@ class InitCommand extends Command {
   }
 }
 
-InitCommand.description = `Initialize files and deploy ekko infrastructure.
+InitCommand.description = `Initialize files and deploy ekko infrastructure
 ...
 The 'init' command sets up everything you'll need to get going with ekko.
 
