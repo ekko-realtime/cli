@@ -5,7 +5,7 @@ const EkkoInit = require("../util/ekkoInit.js");
 class InitCommand extends Command {
   async run() {
     let goodDirectory = await cli.prompt(
-      `You are currently in ${process.cwd()} Do you want to create your Ekko folder here? (y/n)`
+      `You are currently in ${process.cwd()}\nDo you want to create your Ekko folder here? (y/n)`
     );
     goodDirectory = goodDirectory.toLowerCase();
     if (goodDirectory === "y") {
