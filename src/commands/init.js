@@ -10,7 +10,7 @@ class InitCommand extends Command {
     goodDirectory = goodDirectory.toLowerCase();
     if (goodDirectory === "y") {
       let newDeploy = await cli.prompt(
-        "Do you want to deploy a new ekko infrastructure (y/n)?\n"
+        "Do you want to deploy a new ekko infrastructure (y/n)?"
       );
       newDeploy = newDeploy.toLowerCase();
       if (newDeploy === "y") {

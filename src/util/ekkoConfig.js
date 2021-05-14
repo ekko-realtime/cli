@@ -12,6 +12,7 @@ const ora = require("ora");
 const spinner = ora();
 
 const createEkkoGlobalDirectory = async () => {
+  console.log("");
   spinner.start();
   if (!fs.existsSync(EKKO_GLOBAL_DIRECTORY)) {
     try {
@@ -21,7 +22,7 @@ const createEkkoGlobalDirectory = async () => {
       throw err;
     }
   } else {
-    spinner.succeed("~/.ekko already exists");
+    spinner.succeed("~/.ekko already exists\n");
   }
 };
 
