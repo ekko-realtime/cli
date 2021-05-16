@@ -20,6 +20,8 @@ class TeardownCommand extends Command {
 
 TeardownCommand.description = `Tear down your ekko infrastructure on AWS
 ...
+Removes all Lambdas deployed with Ekko.
+
 Removes all server and shared resources infrastructure from AWS and deletes your global ~/.ekko config directory.
 This command does not delete you ekko project directory. 
 

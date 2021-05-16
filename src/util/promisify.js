@@ -1,5 +1,6 @@
 const process = require("process");
 const childProcess = require("child_process");
+const fs = require("fs");
 const { spawn } = require("child_process");
 
 const changeDir = async (directory) => {
@@ -33,4 +34,11 @@ const spawner = async (command, args) => {
   });
 };
 
-module.exports = { changeDir, execute, spawner };
+const getFiles = async () => {
+  return new Promise((resolve, reject) => {
+    let files = fs.readdirSync(".");
+    resolve(files);
+  });
+};
+
+module.exports = { changeDir, execute, spawner, getFiles };

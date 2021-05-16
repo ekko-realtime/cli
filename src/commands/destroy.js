@@ -6,7 +6,7 @@ class DestroyCommand extends Command {
     {
       name: "functionName",
       required: true,
-      description: "Name of the ekko function that you would like to destroy",
+      description: "Name of the AWS Lambda that you would like to tear down",
       hidden: false,
     },
   ];
@@ -16,14 +16,11 @@ class DestroyCommand extends Command {
   }
 }
 
-DestroyCommand.description = `Delete an ekko function locally and from AWS Lambda
+DestroyCommand.description = `Tear down a deployed AWS Lambda
 ...
-Deletes an ekko function folder and tears down the associated AWS Lambda
+Tears down a deployed AWS Lambda.
 
-Pass in the name of the function and this command will:
-
-- remove the function from AWS Lambda
-- delete the (local) directory where that function's code was stored
+Pass in the name of the Ekko function and this command will tear down its associated AWS Lambda.
 `;
 
 module.exports = DestroyCommand;

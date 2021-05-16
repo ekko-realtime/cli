@@ -1,4 +1,5 @@
 const zipFile = require("./zipFile");
+const Promisify = require("./promisify");
 const fs = require("fs");
 const lambda = require("./lambda");
 const process = require("process");
@@ -78,16 +79,24 @@ const destroy = async (functionName) => {
 
     try {
       await lambda.deleteFunction(params).promise();
-      spinner.succeed(`Lambda ${color(functionName)} successfully destroyed!`);
+      spinner.succeed(`Lambda ${color(functionName)} successfully destroyed`);
     } catch (error) {
       spinner.fail(
         `Error tearing down Lambda ${color(functionName)}: ${error}`
       );
     }
-
-    deleteLocalDirectory(functionName);
   } else {
     spinner.fail("Command can't be run outside of ekko_functions directory.");
+  }
+};
+
+const destroyAllLambdas = async () => {
+  const functions = await getFunctionsStatus();
+
+  for (const func of functions) {
+    if (func.deployed) {
+      await destroy(func.name);
+    }
   }
 };
 
@@ -139,8 +148,9 @@ const getEkkoLambdas = async () => {
   return ekkoLambdas.map((lambda) => lambda.FunctionName);
 };
 
-const getEkkoFunctions = () => {
-  const files = getFiles();
+const getEkkoFunctions = async () => {
+  // const files = getFiles();
+  files = await Promisify.getFiles();
   return files.filter(
     (file) =>
       !file.match(/.json/) &&
@@ -149,24 +159,26 @@ const getEkkoFunctions = () => {
   );
 };
 
+const getFunctionsStatus = async () => {
+  const lambdas = await getEkkoLambdas();
+  let functions = await getEkkoFunctions();
+
+  return functions.map((func) => {
+    if (lambdas.includes(func)) {
+      return { name: func, deployed: true };
+    } else {
+      return { name: func, deployed: false };
+    }
+  });
+};
+
 const listFunctionsStatus = async () => {
   spinner.start();
   if (validDirectory()) {
     spinner.stop();
-    const lambdas = await getEkkoLambdas();
-    let functions = getEkkoFunctions();
-
-    functions = functions.map((func) => {
-      if (lambdas.includes(func)) {
-        return { name: func, deployed: true };
-      } else {
-        return { name: func, deployed: false };
-      }
-    });
+    functions = await getFunctionsStatus();
 
     functions.sort();
-
-    spinner.stop();
     console.log("Ekko Functions Status:");
     functions.forEach((func) => {
       if (func.deployed === true) {
@@ -183,24 +195,6 @@ const listFunctionsStatus = async () => {
 const validDirectory = () => {
   let files = getFiles();
   return files.includes(".ekko_functions.txt");
-};
-
-const deleteLocalDirectory = (name) => {
-  fs.rmdir(
-    name,
-    {
-      recursive: true,
-    },
-    (error) => {
-      if (error) {
-        console.log(error);
-      } else {
-        spinner.succeed(
-          `Local ekko function ${color(name)} successfully deleted`
-        );
-      }
-    }
-  );
 };
 
 const deleteLocalFile = (fileName) => {
@@ -225,7 +219,7 @@ module.exports = {
   getEkkoLambdas,
   getEkkoFunctions,
   listFunctionsStatus,
-  deleteLocalDirectory,
   deleteLocalFile,
   validDirectory,
+  destroyAllLambdas,
 };
